@@ -1,0 +1,351 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/bookDetail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+
+    <div class="book-page">
+
+        <!-- ===== HERO ===== -->
+        <section class="book-hero">
+
+            <!-- LEFT: COVER -->
+            <div class="book-cover-wrapper">
+                <img src="<%= book.cover_url %>" alt="<%= book.title %>" class="book-cover-img">
+            </div>
+
+            <!-- RIGHT: DETAILS -->
+            <div class="book-details">
+
+                <!-- TAGS -->
+                <div class="book-tags">
+                    <% tags.forEach(tag=> { %>
+                        <span class="tag">
+                            <%= tag %>
+                        </span>
+                        <% }) %>
+                </div>
+
+                <!-- TITLE -->
+                <h1 class="book-title">
+                    <%= book.title %>
+                </h1>
+
+                <!-- AUTHOR -->
+                <p class="book-author">
+                    <%= book.author %>
+                </p>
+
+                <!-- RATING -->
+                <div class="book-rating">
+                    <div class="stars-row">
+                        <% for(let i=1; i <=5; i++) { %>
+                            <span
+                                class="material-symbols-outlined star <%= i <= book.rating ? 'filled' : '' %>">star</span>
+                            <% } %>
+                    </div>
+                    <span class="rating-text">
+                        <%= book.rating %> RATING
+                    </span>
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="book-actions">
+                    <button onclick="scrollToNotes()" class="btn-primary">
+                        <span class="material-symbols-outlined btn-icon">note_add</span>
+                        Add Reflection
+                    </button>
+
+                    <form action="/books/<%= book.id %>?_method=DELETE" method="POST" style="margin:0;">
+                        <button type="submit" class="btn-secondary">
+                            <span class="material-symbols-outlined btn-icon">delete</span>
+                            Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== AI SUMMARY + SIDEBAR ===== -->
+        <section class="book-insights">
+
+            <!-- LEFT: AI SUMMARY CARD -->
+            <div class="ai-summary-card">
+
+                <div class="ai-summary-header">
+                    <div class="ai-summary-title">
+                        <span class="material-symbols-outlined ai-icon">smart_toy</span>
+
+                        <h3>AI Contextual Summary</h3>
+                    </div>
+                    <span class="sparkle-icon">✦</span>
+                </div>
+
+                <div class="summary-body">
+                
+                    <!-- LOADER -->
+                    <div id="aiLoader" class="ai-loader hidden">
+                        Thinking<span class="dots"></span>
+                    </div>
+                
+                    <!-- TEXT OUTPUT -->
+                    <p id="aiText">
+                        <% if (book.ai_summary) { %>
+                            <%= book.ai_summary %>
+                                <% } else { %>
+                                    No AI summary yet. Generate one below.
+                                    <% } %>
+                    </p>
+                
+                </div>
+                
+                
+
+                <form id="aiForm" action="/books/<%= book.id %>/generate-ai" method="POST" style="margin:0;">
+                    <button type="submit" class="regenerate-btn">
+                        REGENERATE INSIGHTS →
+                    </button>
+                </form>
+
+            </div>
+
+            <!-- RIGHT: SIDEBAR -->
+            <div class="book-sidebar">
+
+                <!-- READING PROGRESS -->
+                <div class="progress-card ai-summary-card">
+                
+                    <p class="progress-label">THINKING DEPTH</p>
+                
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: <%= progress %>%"></div>
+                    </div>
+                
+                    <p class="progress-text">
+                        <%= notes.length %> notes written
+                    </p>
+                
+                </div>
+
+                <!-- KEY INSIGHT -->
+                <div class="insight-card ai-summary-card">
+                    <p class="insight-label">KEY INSIGHT</p>
+                    <div class="insight-border">
+                        <% if (book.ai_insight) { %>
+                            <p class="insight-quote">"<%= book.ai_insight %>"</p>
+                            <% } else { %>
+                                <p class="insight-quote">No insight generated yet.</p>
+                                <% } %>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ===== NOTES ===== -->
+        <section class="book-notes">
+
+            <div class="notes-header">
+                <div class="notes-header-text">
+                    <h2>Reflections & Notes</h2>
+                    <p>Your personal knowledge garden for this title.</p>
+                </div>
+                <button class="btn-new-note" onclick="showNoteForm()">+ NEW NOTE</button>
+            </div>
+
+            <!-- ADD NOTE FORM (hidden) -->
+            <div id="noteFormContainer" class="note-form hidden">
+                <form method="POST" action="/books/<%= book.id %>/notes">
+                    <div class="note-form-row">
+                        <input type="text" name="title" placeholder="e.g., On Stoic Persistence" />
+                        <input type="text" name="page" autocomplete="off" placeholder="e.g.,  p.52" />
+                    </div>
+                    <textarea name="content" placeholder="Deepen your understanding..."></textarea>
+                    <div class="note-form-actions">
+                        <button type="button" class="note-cancel-btn" onclick="hideNoteForm()">Cancel</button>
+                        <button type="submit" class="note-save-btn">Save Note</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- NOTES LIST -->
+            <div class="notes-list">
+                <% notes.forEach(note=> { %>
+                    <div class="note-item">
+
+                        <!-- DOT + META -->
+                        <div class="note-meta-row">
+                            <span class="note-dot">●</span>
+                            <span class="note-date-text">
+                                <%= new Date(note.date).toLocaleDateString('en-US', { month: 'long' , day: 'numeric' ,
+                                    year: 'numeric' }).toUpperCase() %>
+                            </span>
+                            <% if (note.page) { %>
+                                <span class="note-sep">●</span>
+                                <span class="note-page-text">
+                                    pg: <%= note.page %>
+                                </span>
+                                <% } %>
+                        </div>
+
+                        <!-- TITLE -->
+                        <h3 class="note-title" id="title-<%= note.id %>">
+                            <%= note.title %>
+                        </h3>
+
+                        <!-- CONTENT -->
+                        <p class="note-content" id="text-<%= note.id %>">
+                            <%= note.content %>
+                        </p>
+
+                        <!-- EDIT FORM -->
+                        <form method="POST" action="/notes/<%= note.id %>/edit" id="form-<%= note.id %>"
+                            class="edit-form hidden">
+                            <input type="text" name="title" value="<%= note.title %>" class="edit-input" />
+                            <textarea name="content" class="edit-textarea"><%= note.content %></textarea>
+                            <div class="edit-actions">
+                                <button type="button" class="note-cancel-btn"
+                                    onclick="toggleEdit(<%= note.id %>)">Cancel</button>
+                                <button type="submit" class="note-save-btn">Save</button>
+                            </div>
+                        </form>
+
+                        <!-- ACTION BUTTONS -->
+                        <div class="note-actions">
+                            <button class="note-action-btn" onclick="toggleEdit(<%= note.id %>)">
+                                <span class="material-symbols-outlined">edit_note</span>
+                            </button>
+                            <form action="/notes/<%= note.id %>/delete" method="POST" style="margin:0;">
+                                <button type="submit" class="note-action-btn">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <% }) %>
+            </div>
+
+            <!-- VIEW OLDER NOTES -->
+            <% if (totalNotes> notes.length) { %>
+                <div class="view-older">
+                    <button onclick="loadMoreNotes()" class="view-older-btn">
+                        VIEW OLDER NOTES
+                    </button>
+                </div>
+                <% } else if (totalNotes === 0) { %>
+                <div class="view-older">
+                    <button class="view-older-btn" onclick="showNoteForm()">NO NOTES | CREATE ONE</button>
+                </div>
+                <% } else { %>
+                    <div class="view-older">
+                        <span class="view-older-btn">NO MORE NOTES</span>
+                    </div>
+                    <% } %>
+
+        </section>
+
+    </div>
+
+    <%- include("partials/footer") %>
+
+        <script>
+            function showNoteForm() {
+                document.getElementById("noteFormContainer").classList.remove("hidden");
+            }
+            function hideNoteForm() {
+                document.getElementById("noteFormContainer").classList.add("hidden");
+            }
+            function toggleEdit(id) {
+                const text = document.getElementById("text-" + id);
+                const title = document.getElementById("title-" + id);
+                const form = document.getElementById("form-" + id);
+                const isHidden = form.classList.contains("hidden");
+                if (isHidden) {
+                    text.style.display = "none";
+                    title.style.display = "none";
+                    form.classList.remove("hidden");
+                } else {
+                    text.style.display = "block";
+                    title.style.display = "block";
+                    form.classList.add("hidden");
+                }
+            }
+        </script>
+
+        <script>
+            async function generateAI() {
+
+                const loader = document.getElementById("aiLoader");
+                const textEl = document.getElementById("aiText");
+
+                // show loader
+                loader.classList.remove("hidden");
+                textEl.innerHTML = "";
+
+                try {
+                    const res = await fetch(window.location.pathname + "/generate-ai", {
+                        method: "POST"
+                    });
+
+                    const data = await res.json();
+
+                    // fake thinking delay
+                    await new Promise(r => setTimeout(r, 1000));
+
+                    loader.classList.add("hidden");
+
+                    // typing animation
+                    typeText(textEl, data.summary);
+
+                } catch (err) {
+                    loader.classList.add("hidden");
+                    textEl.innerText = "AI failed. Try again.";
+                }
+            }
+
+            // typing effect
+            function typeText(element, text, speed = 18) {
+                element.innerHTML = "";
+                let i = 0;
+
+                function typing() {
+                    if (i < text.length) {
+                        element.innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typing, speed);
+                    }
+                }
+
+                typing();
+            }
+        </script>
+
+        <script>
+            const card = document.querySelector(".ai-summary-card");
+
+            card.addEventListener("mousemove", (e) => {
+                const rect = card.getBoundingClientRect();
+
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                card.style.setProperty("--x", `${x}px`);
+                card.style.setProperty("--y", `${y}px`);
+            });
+
+            // function for scroll effect in booDetail page +addreflection button
+            function scrollToNotes() {
+            document.querySelector(".book-notes").scrollIntoView({
+            behavior: "smooth"
+            });
+            };
+
+            // function for loading more notes if available
+            async function loadMoreNotes() {
+                    alert("Next step: implement pagination API");
+                };
+
+        </script>

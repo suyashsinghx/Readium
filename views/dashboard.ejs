@@ -1,0 +1,178 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <main class="dashboard-container">
+
+        <!-- PAGE HEADER -->
+        <section class="dashboard-header">
+            <h1>Curated Insights</h1>
+            <p class="dashboard-subtitle">A birds-eye view of your intellectual progress, thematic connections, and
+                literary milestones.</p>
+        </section>
+
+        <!-- STATS GRID -->
+        <section class="stats-grid">
+        
+            <!-- TOTAL BOOKS -->
+            <div class="stat-card">
+                <p class="stat-label">TOTAL VOLUMES</p>
+                <div class="stat-value-row">
+                    <h2 class="stat-number">
+                        <%= totalBooks %>
+                    </h2>
+                    <span class="stat-badge">
+                        +<%= booksThisMonth %> this month
+                    </span>
+                </div>
+            </div>
+        
+            <!-- AVG RATING -->
+            <div class="stat-card">
+                <p class="stat-label">AVERAGE RATING</p>
+                <div class="stat-value-row">
+                    <h2 class="stat-number">
+                        <%= avgRating || "—" %>
+                    </h2>
+                    <span class="stat-star">★</span>
+                </div>
+            </div>
+        
+            <!-- READING VELOCITY -->
+            <div class="stat-card">
+                <p class="stat-label">READING VELOCITY</p>
+                <div class="stat-value-row">
+                    <h2 class="stat-number">
+                        <%= readingVelocity %>
+                    </h2>
+                    <span class="stat-unit">books / 90 days</span>
+                </div>
+            </div>
+        
+            <!-- CURRENTLY READING -->
+            <div class="stat-card stat-card--featured">
+                <span class="material-symbols-outlined featured-icon">menu_book</span>
+                <p class="featured-label">Currently Reading</p>
+        
+                <% if (currentBook) { %>
+                    <a href="/books/<%= currentBook.id %>" class="featured-title">
+                        <em>
+                            <%= currentBook.title %>
+                        </em>
+                    </a>
+                    <% } else { %>
+                        <p class="featured-title">No books yet</p>
+                        <% } %>
+            </div>
+        
+        </section>
+
+        <!-- TOP RATED + RECENT MUSINGS -->
+        <section class="dashboard-main">
+
+            <!-- LEFT: TOP RATED WORKS -->
+            <div class="top-books">
+
+                <div class="section-header">
+                    <h2 class="section-title">Top Rated Works</h2>
+                    <a href="/books" class="view-link">View library</a>
+                </div>
+
+                <div class="books-grid">
+                    <% books.forEach(book=> { %>
+                        <div class="book-card-item">
+                            <a href="/books/<%= book.id %>">
+                            <div class="book-cover-wrap">
+                                <img src="<%= book.cover_url || '/images/default.png' %>" alt="<%= book.title %>"
+                                    class="book-cover-img">
+                            </div>
+                            <div class="book-card-meta">
+                                <h3 class="book-card-title">
+                                    <%= book.title %>
+                                </h3>
+                                <p class="book-card-author">
+                                    <%= book.author %>
+                                </p>
+                                <div class="book-card-stars">
+                                    <% for(let i=1; i <=5; i++) { %>
+                                        <span class="star <%= i <= (book.rating || 5) ? 'star--filled' : '' %>">★</span>
+                                        <% } %>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        <% }) %>
+                </div>
+
+            </div>
+
+            <!-- RIGHT: RECENT MUSINGS -->
+            <div class="recent-musings">
+
+                <h2 class="section-title">Recent Musings</h2>
+
+                <div class="musings-list">
+                    <% if (notes.length===0) { %>
+                        <p class="empty-state">No notes yet.</p>
+                        <% } %>
+
+                            <% notes.forEach(note=> { %>
+                                <div class="musing-card">
+                                    <p class="musing-meta">
+                                        <%= new Date(note.date).toLocaleDateString('en-US', { month: 'short' ,
+                                            day: '2-digit' }).toUpperCase() %>
+                                            <% if (note.book_title) { %> <span class="musing-meta-sep">•</span> FROM "
+                                                <%= note.book_title.toUpperCase() %>"<% } %>
+                                    </p>
+                                    <p class="musing-text">"<%= note.content.slice(0, 130) %>..."</p>
+                                </div>
+                                <% }) %>
+                </div>
+
+                <a href="/notes" class="open-vault-link">Open Knowledge Vault</a>
+
+            </div>
+
+        </section>
+
+        <!-- THEMATIC SYNTHESIS BANNER -->
+        <section class="thematic-section">
+        
+            <div class="thematic-left">
+                <h2 class="thematic-title">Your Knowledge Graph</h2>
+        
+                <p class="thematic-desc">
+                    You’ve connected <strong>
+                        <%= totalNotes %>
+                    </strong> ideas across
+                    <strong>
+                        <%= totalBooks %>
+                    </strong> books.
+                </p>
+        
+                <a href="/books" class="explore-link">Explore your library →</a>
+            </div>
+        
+            <div class="thematic-right">
+                <div class="theme-grid">
+        
+                    <% if (graphBooks.length===0) { %>
+                        <p>No books yet</p>
+                        <% } %>
+        
+                            <% graphBooks.forEach(book=> { %>
+                                <a href="/books/<%= book.id %>" class="theme-tile">
+                                    <%= book.title %>
+                                </a>
+                                <% }) %>
+        
+                </div>
+            </div>
+        
+        </section>
+
+    </main>
+
+    <%- include("partials/footer") %>

@@ -1,0 +1,160 @@
+<%- include("partials/header") %>
+
+        <link rel="stylesheet" href="/stylesheets/global.css">
+        <link rel="stylesheet" href="/stylesheets/books.css">
+        <!-- ICON LIBRARY -->
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+        <main class="books-container">
+
+            <!-- HEADER -->
+            <section class="books-header">
+                <h1 class="books-title">The Reading Room</h1>
+                <p class="books-subtitle">
+                    A curated collection of your intellectual journeys, insights, and ongoing explorations.
+                </p>
+            </section>
+
+            <!-- SEARCH + FILTER -->
+            <div class="books-controls-bar">
+            
+                <form method="GET" action="/books" class="books-form">
+                
+                    <!-- SEARCH -->
+                    <div class="controls-search">
+                        <div class="mybook-search-wrapper">
+
+                            <button type="submit" class="mybook-search-icon">
+                                <i class="ri-search-line"></i>
+                            </button>
+                
+                            <input type="text" name="search" autocomplete="off" value="<%= search || '' %>" placeholder="Search by title, author..."
+                                class="mybook-search-input" />
+                        </div>
+                    </div>
+                
+                    <!-- RIGHT GROUP -->
+                    <div class="controls-right-group">
+                
+                        <!-- SORT -->
+                        <div class="mybook-sort-wrapper">
+                            <select name="sort" onchange="this.form.submit()" class="mybook-sort-select">
+                                <option value="date" <%=sort==='date' ? 'selected' : '' %>>Sort by Date</option>
+                                <option value="rating" <%=sort==='rating' ? 'selected' : '' %>>Rating</option>
+                                <option value="title" <%=sort==='title' ? 'selected' : '' %>>Title</option>
+                            </select>
+                        </div>
+                
+                        <!-- TOGGLE -->
+                        <div class="view-toggle" id="viewToggle">
+                        
+                            <!-- SLIDER -->
+                            <div class="toggle-indicator"></div>
+                        
+                            <button type="button" class="toggle-btn active" data-view="grid">
+                                <span class="material-symbols-outlined">grid_view</span>
+                            </button>
+                        
+                            <button type="button" class="toggle-btn" data-view="list">
+                                <span class="material-symbols-outlined">view_list</span>
+                            </button>
+                        
+                        </div>
+                
+                    </div>
+                
+                </form>
+            
+            </div>
+            
+            <!-- BOOK GRID -->
+            <section class="books-grid">
+            
+                <% books.forEach(book=> { %>
+            
+                    <a href="/books/<%= book.id %>" class="book-card">
+            
+                        <div class="book-image">
+                            <img src="<%= book.cover_url || '/images/default.png' %>" />
+                        </div>
+            
+                        <div class="book-content">
+            
+                            <div class="book-top">
+                                <h3>
+                                    <%= book.title %>
+                                </h3>
+                                <span class="rating"><i class="ri-star-s-fill"></i> <%= book.rating || '4.5' %></span>
+                            </div>
+            
+                            <p class="author">
+                                <%= book.author %>
+                            </p>
+            
+                            <div class="tags">
+                                <% if (book.tags) { %>
+                                    <% book.tags.forEach(tag=> { %>
+                                        <span class="tag">
+                                            <%= tag %>
+                                        </span>
+                                        <% }) %>
+                                            <% } %>
+                            </div>
+            
+                        </div>
+            
+                    </a>
+            
+                    <% }) %>
+            
+            </section>
+
+            <!-- EMPTY STATE -->
+            <% if (books.length===0) { %>
+                <p class="empty">No books found</p>
+                <% } %>
+
+                    <!-- LOAD MORE -->
+                    <% if (limit < totalBooks) { %>
+                        <div class="load-more">
+                            <a href="/books?limit=<%= limit + 8 %>&search=<%= search || '' %>&sort=<%= sort %>">
+                                <button>Show more explorations</button>
+                            </a>
+                        </div>
+                        <% } %>
+
+        </main>
+
+        <%- include("partials/footer") %>
+
+        <!-- script code for view toggle button -->
+
+        <script>
+            const toggle = document.getElementById("viewToggle");
+            const buttons = toggle.querySelectorAll(".toggle-btn");
+            const grid = document.querySelector(".books-grid");
+
+            buttons.forEach(btn => {
+                btn.addEventListener("click", () => {
+
+                    // remove active
+                    buttons.forEach(b => b.classList.remove("active"));
+
+                    // add active
+                    btn.classList.add("active");
+
+                    const view = btn.dataset.view;
+
+                    // move slider
+                    if (view === "list") {
+                        toggle.classList.add("list");
+                        grid.classList.add("list-view");
+                    } else {
+                        toggle.classList.remove("list");
+                        grid.classList.remove("list-view");
+                    }
+
+                });
+            });
+        </script>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Readium</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.ico/favicon.svg">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <!-- LOGO -->
+            <div class="nav-logo">
+                <a href="/" class="logo">
+                
+                    <svg class="logo-svg" viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="4" width="20" height="3.5" rx="1.75" fill="currentColor" />
+                        <rect x="0" y="11" width="15" height="3.5" rx="1.75" fill="currentColor" />
+                        <rect x="0" y="18" width="10" height="3.5" rx="1.75" fill="currentColor" />
+                
+                        <text x="30" y="22" font-family="Georgia, 'Times New Roman', serif" font-size="20" letter-spacing="-0.3"
+                            fill="currentColor">
+                            Readium
+                        </text>
+                    </svg>
+                
+                </a>
+            </div>
+
+            <!-- LINKS -->
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link" data-path="/">Home</a>
+                <a href="/books" class="nav-link" data-path="/books">My Books</a>
+                <a href="/dashboard" class="nav-link" data-path="/dashboard">Dashboard</a>
+                <a href="/creator" class="nav-link" data-path="/creator"> <i class="ri-code-s-slash-fill"></i> creator </a>
+
+                <!-- ANIMATED UNDERLINE INDICATOR -->
+                <span class="nav-indicator" id="navIndicator"></span>
+            </div>
+
+            <!-- ACTIONS -->
+             
+            <div class="nav-actions">
+
+                <a href="/add" class="nav-add-btn">Add Book</a>
+                <button class="nav-profile-btn" aria-label="Profile">
+                <span class="material-symbols-outlined">account_circle</span>
+                </button>
+            </div>
+
+        </div>
+    </nav>
+
+    <script>
+        (function () {
+            const links = document.querySelectorAll('.nav-link');
+            const indicator = document.getElementById('navIndicator');
+            const path = window.location.pathname;
+
+            // Find the best matching link
+            let activeLink = null;
+            let bestLen = 0;
+
+            links.forEach(link => {
+                const lp = link.getAttribute('data-path');
+                if (path === lp || (lp !== '/' && path.startsWith(lp))) {
+                    if (lp.length > bestLen) {
+                        bestLen = lp.length;
+                        activeLink = link;
+                    }
+                }
+            });
+
+            // Fallback: home
+            if (!activeLink) activeLink = links[0];
+
+            function setIndicator(link, animate) {
+                link.classList.add('nav-link--active');
+
+                const navRect = document.getElementById('navLinks').getBoundingClientRect();
+                const linkRect = link.getBoundingClientRect();
+
+                const left = linkRect.left - navRect.left;
+                const width = linkRect.width;
+
+                if (!animate) {
+                    indicator.style.transition = 'none';
+                } else {
+                    indicator.style.transition = 'left 0.35s cubic-bezier(.4,0,.2,1), width 0.35s cubic-bezier(.4,0,.2,1), opacity 0.2s ease';
+                }
+
+                indicator.style.left = left + 'px';
+                indicator.style.width = width + 'px';
+                indicator.style.opacity = '1';
+            }
+
+            // Set on load (no animation)
+            setIndicator(activeLink, false);
+
+            // Re-enable transitions after first paint
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    indicator.style.transition = 'left 0.35s cubic-bezier(.4,0,.2,1), width 0.35s cubic-bezier(.4,0,.2,1), opacity 0.2s ease';
+                });
+            });
+
+            // Hover preview
+            links.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    links.forEach(l => l.classList.remove('nav-link--active'));
+                    setIndicator(link, true);
+                });
+            });
+
+            // Reset to active on mouse leave
+            document.getElementById('navLinks').addEventListener('mouseleave', () => {
+                links.forEach(l => l.classList.remove('nav-link--active'));
+                setIndicator(activeLink, true);
+            });
+        })();
+    </script>
+
+    

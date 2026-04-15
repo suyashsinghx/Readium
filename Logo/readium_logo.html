@@ -1,0 +1,189 @@
+
+<style>
+  body { margin: 0; }
+  .logo-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    padding: 48px 40px 52px;
+    background: #f8f8f6;
+  }
+  .logo-label {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 10px;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 14px;
+  }
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+  .logo-box {
+    display: flex;
+    flex-direction: column;
+  }
+  .on-dark {
+    background: #111;
+    border-radius: 14px;
+    padding: 24px 28px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: #e5e5e0;
+  }
+</style>
+
+<div class="logo-stage">
+
+  <div class="logo-box">
+    <div class="logo-label">Icon mark</div>
+    <div class="logo-row">
+
+      <!-- ICON ONLY — light bg -->
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Readium icon mark</title>
+        <!-- Three stacked horizontal bars of decreasing width — pages / layers / depth -->
+        <rect x="8"  y="10" width="32" height="5" rx="2.5" fill="#1a1a1a"/>
+        <rect x="8"  y="21.5" width="24" height="5" rx="2.5" fill="#1a1a1a"/>
+        <rect x="8"  y="33" width="16" height="5" rx="2.5" fill="#1a1a1a"/>
+      </svg>
+
+      <!-- ICON ONLY — dark bg -->
+      <div class="on-dark">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+          <title>Readium icon mark on dark</title>
+          <rect x="8"  y="10" width="32" height="5" rx="2.5" fill="#f5f5f2"/>
+          <rect x="8"  y="21.5" width="24" height="5" rx="2.5" fill="#f5f5f2"/>
+          <rect x="8"  y="33" width="16" height="5" rx="2.5" fill="#f5f5f2"/>
+        </svg>
+      </div>
+
+      <!-- ICON — larger preview -->
+      <svg width="80" height="80" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Readium icon mark large</title>
+        <rect x="8"  y="10" width="32" height="5" rx="2.5" fill="#1a1a1a"/>
+        <rect x="8"  y="21.5" width="24" height="5" rx="2.5" fill="#1a1a1a"/>
+        <rect x="8"  y="33" width="16" height="5" rx="2.5" fill="#1a1a1a"/>
+      </svg>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WORDMARK — light -->
+  <div class="logo-box">
+    <div class="logo-label">Icon + wordmark</div>
+    <div class="logo-row">
+
+      <svg width="180" height="36" viewBox="0 0 180 36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Readium wordmark</title>
+        <!-- Icon mark scaled down -->
+        <rect x="0"  y="4"  width="20" height="3.5" rx="1.75" fill="#1a1a1a"/>
+        <rect x="0"  y="11" width="15" height="3.5" rx="1.75" fill="#1a1a1a"/>
+        <rect x="0"  y="18" width="10" height="3.5" rx="1.75" fill="#1a1a1a"/>
+        <!-- Wordmark text -->
+        <text x="30" y="22"
+          font-family="'Georgia', 'Newsreader', 'Times New Roman', serif"
+          font-size="20"
+          font-weight="400"
+          letter-spacing="-0.3"
+          fill="#1a1a1a">Readium</text>
+      </svg>
+
+      <!-- WORDMARK — dark bg -->
+      <div class="on-dark">
+        <svg width="180" height="36" viewBox="0 0 180 36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+          <title>Readium wordmark on dark</title>
+          <rect x="0"  y="4"  width="20" height="3.5" rx="1.75" fill="#f5f5f2"/>
+          <rect x="0"  y="11" width="15" height="3.5" rx="1.75" fill="#f5f5f2"/>
+          <rect x="0"  y="18" width="10" height="3.5" rx="1.75" fill="#f5f5f2"/>
+          <text x="30" y="22"
+            font-family="'Georgia', 'Newsreader', 'Times New Roman', serif"
+            font-size="20"
+            font-weight="400"
+            letter-spacing="-0.3"
+            fill="#f5f5f2">Readium</text>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SIZES IN HEADER CONTEXT -->
+  <div class="logo-box">
+    <div class="logo-label">Header context — actual sizes</div>
+
+    <!-- Simulated navbar -->
+    <div style="background:#fff; border:1px solid #e8e8e3; border-radius:10px; padding:0 24px; height:56px; display:flex; align-items:center; justify-content:space-between; max-width:600px;">
+      <svg width="140" height="28" viewBox="0 0 180 36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+        <title>Readium wordmark nav</title>
+        <rect x="0"  y="4"  width="20" height="3.5" rx="1.75" fill="#1a1a1a"/>
+        <rect x="0"  y="11" width="15" height="3.5" rx="1.75" fill="#1a1a1a"/>
+        <rect x="0"  y="18" width="10" height="3.5" rx="1.75" fill="#1a1a1a"/>
+        <text x="30" y="22"
+          font-family="'Georgia','Times New Roman',serif"
+          font-size="20"
+          font-weight="400"
+          letter-spacing="-0.3"
+          fill="#1a1a1a">Readium</text>
+      </svg>
+      <div style="display:flex;gap:20px;align-items:center;">
+        <span style="font-family:system-ui;font-size:13px;color:#6b7280;">Home</span>
+        <span style="font-family:system-ui;font-size:13px;color:#1a1a1a;font-weight:600;border-bottom:2px solid #1a1a1a;padding-bottom:2px;">My Books</span>
+        <span style="font-family:system-ui;font-size:13px;color:#6b7280;">Dashboard</span>
+      </div>
+      <div style="background:#3d4f5e;color:#fff;font-family:system-ui;font-size:12px;font-weight:600;padding:7px 14px;border-radius:7px;">Add Book</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FAVICON GRID -->
+  <div class="logo-box">
+    <div class="logo-label">Favicon sizes</div>
+    <div style="display:flex;align-items:flex-end;gap:20px;">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" role="img">
+          <title>32px favicon</title>
+          <rect x="8"  y="10" width="32" height="5" rx="2.5" fill="#1a1a1a"/>
+          <rect x="8"  y="21.5" width="24" height="5" rx="2.5" fill="#1a1a1a"/>
+          <rect x="8"  y="33" width="16" height="5" rx="2.5" fill="#1a1a1a"/>
+        </svg>
+        <span style="font-family:system-ui;font-size:10px;color:#999;">32px</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <svg width="20" height="20" viewBox="0 0 48 48" fill="none" role="img">
+          <title>20px favicon</title>
+          <rect x="8"  y="10" width="32" height="5" rx="2.5" fill="#1a1a1a"/>
+          <rect x="8"  y="21.5" width="24" height="5" rx="2.5" fill="#1a1a1a"/>
+          <rect x="8"  y="33" width="16" height="5" rx="2.5" fill="#1a1a1a"/>
+        </svg>
+        <span style="font-family:system-ui;font-size:10px;color:#999;">20px</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 48 48" fill="none" role="img">
+          <title>16px favicon</title>
+          <rect x="8"  y="10" width="32" height="5" rx="2.5" fill="#1a1a1a"/>
+          <rect x="8"  y="21.5" width="24" height="5" rx="2.5" fill="#1a1a1a"/>
+          <rect x="8"  y="33" width="16" height="5" rx="2.5" fill="#1a1a1a"/>
+        </svg>
+        <span style="font-family:system-ui;font-size:10px;color:#999;">16px</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

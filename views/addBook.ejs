@@ -1,0 +1,267 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/stylesheets/addBook.css">
+
+    <div class="addbook-page">
+
+        <!-- HEADER -->
+        <div class="addbook-header">
+            <a href="/books" class="back-link">
+                ← RETURN TO LIBRARY
+            </a>
+
+            <h1>Add a New Volume</h1>
+
+            <p class="subtitle">
+                "A library is not a luxury but one of the necessities of life." Document your latest find for your
+                personal collection.
+            </p>
+        </div>
+
+        <!-- MAIN GRID -->
+        <div class="addbook-grid">
+
+            <!-- LEFT: FORM -->
+            <form action="/add" method="POST" class="addbook-form">
+
+                <!-- TITLE ROW -->
+                <div class="form-group">
+                    <div class="title-input-wrapper">
+                        <div class="title-input-group">
+                            <label>BOOK TITLE</label>
+                            <input type="text" name="title" id="bookSearch"
+                                placeholder="e.g. The Architecture of Happiness" required>
+                        </div>
+                        <button type="button" class="auto-fetch" id="autoFetchBtn">✦ AUTO-FETCH</button>
+                    </div>
+                    <!-- SUGGESTION BOX -->
+                    <div class="search-results-wrapper">
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </div>
+
+                <!-- AUTHOR + RATING -->
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label>AUTHOR / PHILOSOPHER</label>
+                        <input type="text" name="author" placeholder="e.g. Alain de Botton">
+                    </div>
+
+                    <div class="form-group">
+                        <label>RATING</label>
+                        <div class="rating-wrapper">
+                            <input type="number" name="rating" step="0.1" min="0" max="5" placeholder="0.0">
+                            <span class="rating-suffix">/5.0</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- TAGS -->
+                <div class="form-group">
+                    <label>INTELLECTUAL TAGS</label>
+                    <div class="tags-container">
+                        <div class="tags-display" id="tagsDisplay"></div>
+                        <input type="text" id="tagsInput" placeholder="Add a tag..." class="tags-input">
+                        <button type="button" class="btn-new-tag" id="addTagBtn">+ New Tag</button>
+                        <input type="hidden" name="tags" id="tagsHidden">
+                    </div>
+                </div>
+
+                <!-- NOTES -->
+                <div class="form-group">
+                    <label>PERSONAL REFLECTIONS & SYNTHESIS</label>
+                    <textarea name="notes" rows="6"
+                        placeholder="Deepen your understanding by synthesizing the core arguments..."></textarea>
+                </div>
+
+                <!-- HIDDEN INPUTS FOR API DATA -->
+                <input type="hidden" name="description" id="descriptionInput">
+                <input type="hidden" name="cover_url" id="coverUrlInput">
+                <input type="hidden" name="pages" id="pagesInput">
+
+                <!-- ACTIONS -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">
+                        📖 Catalog Book
+                    </button>
+
+                    <button type="button" class="btn-draft" onclick="window.location.href='/books'">
+                        DRAFT & EXIT
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- RIGHT: PREVIEW -->
+            <div class="addbook-preview">
+
+                <div class="preview-image">
+                    <img src="https://plus.unsplash.com/premium_photo-1685287731569-d8f8894d9a1f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YWRkfGVufDB8MXwwfHx8MA%3D%3D" id="previewImg" alt="Book Cover Preview">
+                </div>
+
+                <div class="insight-card">
+                    <p class="quote-mark">"</p>
+                    <h4>Curator's Tip</h4>
+                    <p class="insight-text">
+                        When adding notes, try to relate the content to at least two other works in your library to
+                        strengthen your personal knowledge web.
+                    </p>
+                </div>
+
+                <!-- <div class="stats">
+                    <div class="stat-box">
+                        <h3>12</h3>
+                        <p>Works by Author</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h3>4</h3>
+                        <p>Similar Topics</p>
+                    </div>
+                </div> -->
+
+                <div class="insight-stats">
+                
+                    <div class="stat-box">
+                        <h3>
+                            <%= totalNotes %>
+                        </h3>
+                        <p>Notes Written</p>
+                    </div>
+                
+                
+                    <div class="stat-box">
+                        <h3>
+                            <%= totalBooks %>
+                        </h3>
+                        <p>Total Books</p>
+                    </div>
+                
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        let tagsArray = [];
+
+        function renderTags() {
+            const tagsDisplay = document.getElementById('tagsDisplay');
+            tagsDisplay.innerHTML = '';
+
+            tagsArray.forEach(tag => {
+                const badge = document.createElement('div');
+                badge.classList.add('tag-badge');
+                badge.innerHTML = `
+                ${tag}
+                <button type="button" onclick="removeTag('${tag}')">×</button>
+            `;
+                tagsDisplay.appendChild(badge);
+            });
+
+            document.getElementById('tagsHidden').value = tagsArray.join(', ');
+        }
+
+        function removeTag(tag) {
+            tagsArray = tagsArray.filter(t => t !== tag);
+            renderTags();
+        }
+
+        function addTag() {
+            const input = document.getElementById('tagsInput');
+            const tag = input.value.trim();
+
+            if (tag && !tagsArray.includes(tag)) {
+                tagsArray.push(tag);
+                input.value = '';
+                renderTags();
+            }
+        }
+
+        document.getElementById('addTagBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            addTag();
+        });
+
+        document.getElementById('tagsInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addTag();
+            }
+        });
+
+        document.getElementById('autoFetchBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            const query = document.getElementById('bookSearch').value;
+            if (query.length < 3) {
+                alert('Enter at least 3 characters to search');
+                return;
+            }
+            document.getElementById('bookSearch').dispatchEvent(new Event('input'));
+        });
+
+        const input = document.getElementById("bookSearch");
+        const resultsDiv = document.getElementById("searchResults");
+
+        input.addEventListener("input", async () => {
+            const query = input.value;
+
+            if (query.length < 3) {
+                resultsDiv.innerHTML = "";
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/search?q=${query}`);
+                const data = await res.json();
+
+                resultsDiv.innerHTML = "";
+
+                data.forEach(book => {
+                    const div = document.createElement("div");
+                    div.classList.add("search-item");
+                    div.innerHTML = `<strong>${book.title}</strong><br>
+                                 <span style="font-size:12px; color:gray;">${book.author}</span>`;
+                    div.onclick = () => selectBook(book);
+                    resultsDiv.appendChild(div);
+                });
+
+            } catch (err) {
+                console.error(err);
+            }
+        });
+
+        function selectBook(book) {
+            document.querySelector("input[name='title']").value = book.title;
+            document.querySelector("input[name='author']").value = book.author;
+
+            if (book.rating) {
+                document.querySelector("input[name='rating']").value = book.rating;
+            }
+
+            if (book.pages) {
+                document.getElementById("pagesInput").value = book.pages;
+            }
+
+              document.getElementById("descriptionInput").value = book.description || "";
+
+            if (book.cover) {
+                document.getElementById("coverUrlInput").value = book.cover;
+                document.getElementById("previewImg").src = book.cover;
+            }
+
+            if (book.tags && book.tags.length > 0) {
+                tagsArray = book.tags;
+                renderTags();
+            }
+
+            document.getElementById("searchResults").innerHTML = "";
+        }
+    </script>
+
+    <%- include("partials/footer") %>

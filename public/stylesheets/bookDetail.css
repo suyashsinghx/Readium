@@ -1,0 +1,830 @@
+/* =========================
+   PAGE
+========================= */
+.book-page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    background: #f5f6f7;
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+.book-hero {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 50px;
+    align-items: flex-start;
+    margin-bottom: 36px;
+    padding: 30px 0 20px;
+}
+
+/* COVER */
+.book-cover-wrapper {
+    width: 100%;
+}
+
+.book-cover-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+/* DETAILS */
+.book-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+/* TAGS */
+.book-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    padding: 5px 12px;
+    background: #e5e7eb;
+    border-radius: 20px;
+    color: #374151;
+}
+
+/* TITLE */
+.book-title {
+    font-size: 52px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.1;
+    margin: 4px 0 0;
+}
+
+/* AUTHOR */
+.book-author {
+    font-style: italic;
+    font-size: 15px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* RATING */
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.stars-row {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.star {
+    font-size: 22px;
+    color: #d1d5db;
+}
+
+.star.filled {
+    color: #2563eb;
+}
+
+.rating-text {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #6b7280;
+}
+
+/* ACTIONS */
+.book-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 22px;
+    background: #3d4f5e;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+    background: #2f3f4d;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 11px 22px;
+    background: #e5e7eb;
+    color: #374151;
+    border-radius: 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #d1d5db;
+}
+
+.btn-icon {
+    font-size: 16px;
+}
+
+/* =========================
+   AI SUMMARY + SIDEBAR
+========================= */
+.book-insights {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+    margin-bottom: 60px;
+    align-items: start;
+}
+
+/* AI SUMMARY CARD */
+.ai-summary-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 28px 30px;
+
+    border: 1px solid rgba(255, 255, 255, 0.4);
+
+    transition: all 0.25s ease;
+
+    /* for glow */
+    overflow: hidden;
+}
+
+/* hover lift */
+.ai-summary-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.ai-summary-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    background: radial-gradient(300px circle at var(--x, 50%) var(--y, 50%),
+            rgba(99, 102, 241, 0.15),
+            transparent 60%);
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    pointer-events: none;
+}
+
+.ai-summary-card:hover::before {
+    opacity: 1;
+}
+
+.ai-summary-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.ai-summary-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.ai-summary-title i {
+    font-size: 20px;
+    color: black;
+    display: inline-block;
+}
+
+.ai-icon {
+    font-size: 20px;
+    color: #374151;
+}
+
+.ai-summary-title h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.sparkle-icon {
+    font-size: 22px;
+    color: #9ca3af;
+    line-height: 1;
+}
+
+.summary-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.summary-body p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #374151;
+    margin: 0;
+}
+
+.regenerate-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #4b5563;
+    padding: 0;
+    text-align: left;
+    transition: color 0.2s ease;
+}
+
+.regenerate-btn:hover {
+    color: #111827;
+}
+
+/* SIDEBAR */
+.book-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* PROGRESS CARD */
+.progress-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.progress-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #6b7280;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.progress-bar-track {
+    width: 100%;
+    height: 5px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: #3d4f5e;
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.progress-text {
+    font-size: 13px;
+    color: #374151;
+    font-weight: 500;
+}
+
+/* KEY INSIGHT CARD */
+.insight-card {
+    background: #edf7f2;
+    border-radius: 14px;
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.insight-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #4b7a65;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.insight-border {
+    border-left: 3px solid #4b7a65;
+    padding-left: 14px;
+}
+
+.insight-quote {
+    font-style: italic;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.65;
+    color: #1f2937;
+    margin: 0;
+}
+
+/* =========================
+   NOTES SECTION
+========================= */
+.book-notes {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 36px;
+}
+
+.notes-header-text h2 {
+    font-size: 30px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 4px;
+}
+
+.notes-header-text p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.btn-new-note {
+    padding: 9px 18px;
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    color: #374151;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.btn-new-note:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+}
+
+/* =========================
+   NOTE ADD FORM
+========================= */
+.note-form {
+    background: #f8fafb;
+    border-left: 4px solid #475569;
+    border-radius: 0 14px 14px 0;
+    padding: 28px 28px 22px;
+    margin-bottom: 32px;
+}
+
+.note-form::before {
+    content: "Add Reflection";
+    display: block;
+    font-family: Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.note-form::after {
+    content: "Capture a thought, query, or connection from your reading.";
+    display: block;
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.note-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.note-form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.note-form input[type="text"],
+.note-form textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border-radius: 10px;
+    border: none;
+    background: #e5eaee;
+    font-size: 14px;
+    color: #1f2937;
+    outline: none;
+    box-sizing: border-box;
+    transition: background 0.2s ease;
+}
+
+.note-form input[type="text"]:focus,
+.note-form textarea:focus {
+    background: #dde3e8;
+}
+
+.note-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.note-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.note-cancel-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #6b7280;
+    transition: color 0.15s ease;
+}
+
+.note-cancel-btn:hover {
+    color: #374151;
+}
+
+.note-save-btn {
+    background: #475569;
+    color: #fff;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.note-save-btn:hover {
+    background: #334155;
+}
+
+/* =========================
+   NOTES LIST
+========================= */
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.note-item {
+    padding: 0 0 36px 20px;
+    border-left: 2px solid #e5e7eb;
+    position: relative;
+}
+
+/* META ROW: dot + date + page */
+.note-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.note-dot {
+    position: absolute;
+    left: -5px;
+    top: 3px;
+    font-size: 8px;
+    color: #9ca3af;
+    line-height: 1;
+}
+
+.note-date-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+.note-sep {
+    font-size: 8px;
+    color: #9ca3af;
+}
+
+.note-page-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    color: #6b7280;
+    text-transform: uppercase;
+}
+
+/* NOTE TITLE */
+.note-title {
+    font-size: 18px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    color: #111827;
+    margin: 0 0 8px;
+    line-height: 1.3;
+}
+
+/* NOTE CONTENT */
+.note-content {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #4b5563;
+    margin: 0 0 12px;
+}
+
+/* NOTE ACTIONS (edit / delete icons) */
+.note-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.note-action-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s ease;
+}
+
+.note-action-btn:hover {
+    color: #374151;
+}
+
+.note-action-btn .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* EDIT FORM */
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.edit-input {
+    width: 50%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    background: #e6e8ea;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.edit-textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: none;
+    background: #e6e8ea;
+    font-size: 14px;
+    outline: none;
+    box-sizing: border-box;
+    min-height: 100px;
+    resize: vertical;
+}
+
+.edit-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* VIEW OLDER */
+.view-older {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-top: 40px;
+    padding-top: 20px;
+}
+
+.view-older-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    color: #6b7280;
+    transition: color 0.2s ease;
+}
+
+.view-older-btn:hover {
+    color: #111827;
+}
+
+.view-older-arrow {
+    font-size: 18px;
+    color: #9ca3af;
+    line-height: 1;
+}
+
+/* =========================
+   UTILITY
+========================= */
+.hidden {
+    display: none !important;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .book-hero {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .book-cover-wrapper {
+        max-width: 200px;
+    }
+
+    .book-title {
+        font-size: 34px;
+    }
+
+    .book-insights {
+        grid-template-columns: 1fr;
+    }
+
+    .note-form-row {
+        flex-direction: column;
+    }
+
+    .edit-input {
+        width: 100%;
+    }
+}
+
+.depth-card {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+
+
+/* AI LODING EFFECT SUMMARY */
+.ai-loading {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ai-shimmer {
+    height: 80px;
+    border-radius: 10px;
+    background: linear-gradient(90deg,
+            #e5e7eb 25%,
+            #f3f4f6 50%,
+            #e5e7eb 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s infinite;
+}
+
+.ai-thinking {
+    font-size: 13px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.ai-loader {
+    font-size: 14px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* animated dots */
+.dots::after {
+    content: "";
+    animation: dots 1.4s infinite;
+}
+
+@keyframes dots {
+    0% {
+        content: "";
+    }
+
+    33% {
+        content: ".";
+    }
+
+    66% {
+        content: "..";
+    }
+
+    100% {
+        content: "...";
+    }
+}
+
+
+.stats-mini {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.stats-mini div {
+    text-align: center;
+}
+
+.stats-mini h4 {
+    font-size: 18px;
+    margin: 0;
+    color: #111827;
+}
+
+.stats-mini span {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #22c55e);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.progress-text {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 8px;
+}

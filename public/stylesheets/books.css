@@ -1,0 +1,329 @@
+/* ===== CONTAINER ===== */
+.books-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 120px 20px 60px;
+}
+
+/* ===== HEADER ===== */
+.books-title {
+    font-size: 48px;
+    font-family: serif;
+    margin-bottom: 10px;
+}
+
+.books-subtitle {
+    color: #6b7280;
+    max-width: 600px;
+}
+
+/* ===== CONTROLS BAR ===== */
+.books-controls-bar {
+    margin: 40px 0;
+}
+
+/* MAIN FLEX */
+.books-form {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* SEARCH EXPANDS */
+.controls-search {
+    flex: 1;
+}
+
+/* RIGHT GROUP */
+.controls-right-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* CENTER (SEARCH pushed right feel) */
+.controls-center {
+    display: flex;
+    justify-content: space-between;
+    /* Pushes search left and tools right */
+    align-items: center;
+    gap: 16px;
+    /* Adjust for general spacing */
+}
+
+
+
+/* ===== SEARCH ===== */
+.mybook-search-wrapper {
+    position: relative;
+    width: 394px;
+    max-width: 420px;
+}
+
+
+
+.mybook-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    font-size: 18px;
+    color: #6b7280;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.25s ease;
+}
+
+/* HOVER EFFECT */
+.mybook-search-icon:hover {
+    color: #111827;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* ACTIVE CLICK */
+.mybook-search-icon:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.mybook-search-input {
+    width: 80%;
+    padding: 12px 16px 12px 42px;
+    border-radius: 12px;
+    border: none;
+    background: #e5e7eb;
+    font-size: 14px;
+    outline: none;
+    padding-left: 42px;
+}
+
+.mybook-search-input:focus {
+    background: #dbdfe3;
+}
+
+/* ===== SORT ===== */
+.mybook-sort-select {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: none;
+    background: #e5e7eb;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* ===== VIEW TOGGLE ===== */
+.view-toggle {
+    display: flex;
+    background: #e5e7eb;
+    padding: 4px;
+    border-radius: 12px;
+    gap: 4px;
+}
+
+.toggle-btn {
+    border: none;
+    background: transparent;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #6b7280;
+    transition: 0.2s;
+}
+
+.toggle-btn.active {
+    background: white;
+    color: #111;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== GRID ===== */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+/* ===== CARD ===== */
+.book-card {
+    cursor: pointer;
+    transition: 0.3s;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+}
+
+.book-card:hover {
+    transform: translateY(-8px);
+}
+
+.book-image {
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #f3f4f6;
+}
+
+.book-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-content {
+    margin-top: 12px;
+    margin-left: 7px;
+}
+
+.book-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-top h3 {
+    font-size: 18px;
+}
+
+.author {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* ===== TAGS ===== */
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+.tag {
+    font-size: 10px;
+    padding: 3px 6px;
+    background: #e5e7eb;
+    border-radius: 5px;
+}
+
+/* ===== EMPTY ===== */
+.empty {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* ===== LOAD MORE ===== */
+.load-more {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.load-more button {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    /* background: #e5e7eb; */
+    cursor: pointer;
+}
+
+.load-more button:hover {
+    background: #d1d5db;
+}
+
+/* VIEW TOGGLE CODE CSS */
+/* ===== VIEW TOGGLE ===== */
+
+.view-toggle {
+    position: relative;
+    display: flex;
+    background: #e5e7eb;
+    padding: 4px;
+    border-radius: 12px;
+    width: fit-content;
+
+    overflow: hidden;
+    /* 🔥 FIX: hides white leak */
+}
+
+/* BUTTON */
+.toggle-btn {
+    position: relative;
+    z-index: 2;
+    border: none;
+    background: transparent;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #6b7280;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: color 0.25s ease;
+}
+
+/* ACTIVE TEXT */
+.toggle-btn.active {
+    color: #111;
+}
+
+/* ===== INDICATOR ===== */
+.toggle-indicator {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+
+    width: calc(50% - 4px);
+    /* 🔥 dynamic width */
+    height: calc(100% - 8px);
+
+    background: white;
+    border-radius: 8px;
+
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* MOVE RIGHT PERFECTLY */
+.view-toggle.list .toggle-indicator {
+    transform: translateX(100%);
+}
+
+/* ===== GRID VIEW ===== */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+/* ===== LIST VIEW ===== */
+.books-grid.list-view {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* LIST CARD */
+.books-grid.list-view .book-card {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* IMAGE */
+.books-grid.list-view .book-image {
+    width: 80px;
+    height: 120px;
+}
+
+/* CONTENT */
+.books-grid.list-view .book-content {
+    flex: 1;
+}

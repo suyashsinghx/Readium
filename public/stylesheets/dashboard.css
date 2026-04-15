@@ -1,0 +1,456 @@
+/* =========================
+   PAGE
+========================= */
+.dashboard-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+}
+
+/* =========================
+   PAGE HEADER
+========================= */
+.dashboard-header {
+    margin-bottom: 36px;
+}
+
+.dashboard-header h1 {
+    font-size: 52px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 800;
+    color: #111827;
+    line-height: 1.1;
+    margin: 0 0 12px;
+}
+
+.dashboard-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.65;
+    max-width: 480px;
+    margin: 0;
+}
+
+/* =========================
+   STATS GRID
+========================= */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    background: #ffffff;
+    border: 1px solid #e9ebee;
+    border-radius: 14px;
+    padding: 22px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.stat-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.stat-number {
+    font-size: 36px;
+    font-family: Georgia, serif;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    line-height: 1;
+}
+
+.stat-badge {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.stat-star {
+    font-size: 18px;
+    color: #374151;
+}
+
+.stat-unit {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* FEATURED (currently reading) */
+.stat-card--featured {
+    background: #e8edf2;
+    border-color: #d6dce3;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.featured-icon {
+    font-size: 22px;
+    color: #4e6171;
+}
+
+.featured-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    margin: 0;
+}
+
+.featured-title {
+    font-size: 15px;
+    font-family: Georgia, serif;
+    color: #1f2937;
+    margin: 0;
+}
+
+/* =========================
+   MAIN 2-COL GRID
+========================= */
+.dashboard-main {
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+    align-items: start;
+}
+
+/* =========================
+   SECTION HEADERS
+========================= */
+.section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 22px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+}
+
+.view-link {
+    font-size: 13px;
+    color: #6b7280;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+}
+
+.view-link:hover {
+    color: #111827;
+}
+
+/* =========================
+   TOP RATED WORKS
+========================= */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.book-card-item {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.book-cover-wrap {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #e5e7eb;
+}
+
+.book-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+}
+
+.book-cover-wrap:hover .book-cover-img {
+    transform: scale(1.04);
+}
+
+.book-card-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.book-card-title {
+    font-size: 15px;
+    font-family: Georgia, serif;
+    font-weight: 700;
+    color: #111827;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.book-card-author {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 0;
+    font-style: italic;
+}
+
+.book-card-stars {
+    display: flex;
+    gap: 1px;
+    margin-top: 2px;
+}
+
+.star {
+    font-size: 14px;
+    color: #d1d5db;
+}
+
+.star--filled {
+    color: #374151;
+}
+
+/* =========================
+   RECENT MUSINGS
+========================= */
+.recent-musings {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.recent-musings .section-title {
+    margin-bottom: 20px;
+}
+
+.musings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.musing-card {
+    background: #ffffff;
+    border: 1px solid #e9ebee;
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: border-color 0.15s ease;
+}
+
+.musing-card:hover {
+    border-color: #c4cad1;
+}
+
+.musing-meta {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #9ca3af;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.musing-meta-sep {
+    margin: 0 4px;
+}
+
+.musing-text {
+    font-size: 13.5px;
+    color: #374151;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.open-vault-link {
+    font-size: 13px;
+    color: #374151;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-align: center;
+    display: block;
+    margin-top: 8px;
+    transition: color 0.15s ease;
+}
+
+.open-vault-link:hover {
+    color: #111827;
+}
+
+.empty-state {
+    font-size: 14px;
+    color: #9ca3af;
+    padding: 16px 0;
+}
+
+/* =========================
+   THEMATIC SYNTHESIS BANNER
+========================= */
+.thematic-section {
+    background: #e4f0ea;
+    border-radius: 16px;
+    padding: 48px 44px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.thematic-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.thematic-title {
+    font-size: 28px;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.thematic-desc {
+    font-size: 14px;
+    color: #374151;
+    line-height: 1.7;
+    margin: 0;
+}
+
+.theme-link {
+    color: #1f2937;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.explore-link {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1f2937;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    transition: gap 0.2s ease;
+}
+
+.explore-link:hover {
+    gap: 8px;
+}
+
+/* THEMATIC GRID (right side) */
+.thematic-right {
+    position: relative;
+}
+
+.theme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
+}
+
+.theme-tile {
+    background: #d2e8da;
+    border-radius: 10px;
+    padding: 18px 16px;
+    font-size: 13.5px;
+    color: #1f4030;
+    font-weight: 500;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.theme-tile--top {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background: #e4f0ea;
+    border: 1px solid #c2d9cc;
+}
+
+.theme-tile--side {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    background: #d0e8d9;
+}
+
+.theme-tile--bottom {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    background: #e4f0ea;
+    border: 1px solid #c2d9cc;
+}
+
+.theme-tile--side2 {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    background: #d0e8d9;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-main {
+        grid-template-columns: 1fr;
+    }
+
+    .thematic-section {
+        grid-template-columns: 1fr;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .dashboard-header h1 {
+        font-size: 36px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+}

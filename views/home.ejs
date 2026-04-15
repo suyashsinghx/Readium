@@ -1,0 +1,121 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+
+    <main class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-left">
+                <h1>
+                    Track, Remember,<br>
+                    <span class="highlight">Apply</span> What You Read.
+                </h1>
+
+                <p class="hero-desc">
+                    Your personal knowledge repository for deep reading.
+                    Curate your library, extract meaningful insights, and build a second brain.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="/add" class="btn-primary">Add Book</a>
+                    <a href="/books" class="btn-secondary">View Library →</a>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <img src="/images/Nodeium.avif" alt="Book">
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <p class="stat-title">Active Reading</p>
+                <h3>
+                    <%= totalBooks %> Books
+                </h3>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-title">Recent Thinking</p>
+                <h3>
+                    <%= notesThisWeek %> notes
+                </h3>
+                <span>+<%= notesYesterday %> last 24h</span>
+            </div>
+
+            <div class="stat-card highlight-card">
+                <span class="material-symbols-outlined featured-icon" style="margin-left: 2px;">menu_book</span>
+                <p class="featured-label" style="margin-bottom: 6px;">Currently Reading</p>
+                
+                <% if (currentBook) { %>
+                    <a href="/books/<%= currentBook.id %>" class="featured-title">
+                        <em style="font-weight: bold;">
+                            <i class="ri-bar-chart-horizontal-line"></i>
+                            <%= currentBook.title %>
+                        </em>
+                    </a>
+                    <% } else { %>
+                        <p class="featured-title">No books yet</p>
+                        <% } %>
+            </div>
+
+        </section>
+
+        <!-- RECENT BOOKS -->
+        <section class="recent">
+            <div class="recent-header">
+                <div>
+                    <h2>Recently Added</h2>
+                    <p>The latest additions to your intellectual shelf.</p>
+                </div>
+                <a href="/books">View All Library</a>
+            </div>
+
+            <div class="books-grid">
+                <% if (books.length===0) { %>
+                    <p>No books added yet</p>
+                    <% } %>
+
+                        <% books.forEach(book=> { %>
+                            <div class="book-card" onclick="window.location='/books/<%= book.id %>'">
+
+                                <img src="<%= book.cover_url || '/images/default.png' %>" />
+
+                                <div class="book-info">
+                                    <h4>
+                                        <%= book.title %>
+                                    </h4>
+
+                                    <p class="author">
+                                        <%= book.author %>
+                                    </p>
+
+                                    <div class="rating">
+                                        <i class="ri-star-s-fill"></i>
+                                        <span>
+                                            <%= book.rating || '4.5' %>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <% }) %>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section class="quote">
+            <p>
+                "I cannot remember the books I've read any more than the meals I have eaten;
+                even so, they have made me."
+            </p>
+            <span>— Ralph Waldo Emerson</span>
+        </section>
+
+    </main>
+
+    <%- include("partials/footer") %>

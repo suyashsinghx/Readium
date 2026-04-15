@@ -1,0 +1,203 @@
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* HERO */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 60px 0;
+}
+
+.hero-left {
+    max-width: 550px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.2;
+}
+
+.highlight {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.hero-desc {
+    margin: 20px 0;
+    color: #555;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary {
+    background: #4b5563;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+}
+
+.btn-secondary {
+    background: none;
+    border: none;
+    color: #333;
+}
+
+/* STATS */
+.stats {
+    display: flex;
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.stat-card {
+    flex: 1;
+    background: #bcbcbc17;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.stat-card h3{
+    margin-top: 10px;
+}
+
+.highlight-card {
+    background: #a5a2a83b;
+}
+
+/* RECENT */
+.recent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.books-grid {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.book-card {
+    width: 250px;
+}
+
+.book-card img {
+    height: 80%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.book-info {
+    margin-top: 10px;
+}
+
+.author {
+    color: gray;
+}
+
+.rating {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.tags {
+    display: flex;
+    gap: 5px;
+}
+
+.tag {
+    background: #e5e7eb;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+/* QUOTE */
+.quote {
+    margin: 60px 0;
+    padding: 30px;
+    background: #e6f4ea;
+    border-radius: 10px;
+}
+
+.quote p {
+    font-style: italic;
+}
+
+/* SMOOTH TRANSITIONS GLOBAL */
+button,
+a,
+.book-card,
+.stat-card,
+img {
+    transition: all 0.3s ease;
+}
+
+/* BUTTON HOVER */
+.btn-primary:hover {
+    transform: translateY(-2px);
+    background: #374151;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary:hover {
+    color: #111;
+    transform: translateX(5px);
+}
+
+/* HERO IMAGE EFFECT */
+.hero-right img {
+    border-radius: 20px;
+    filter: grayscale(30%);
+    height: 600px;
+    width: 500px;
+}
+
+.hero-right img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+/* STAT CARD HOVER */
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* BOOK CARD HOVER (IMPORTANT) */
+.book-card {
+    cursor: pointer;
+}
+
+.book-card:hover {
+    transform: translateY(-10px);
+}
+
+.book-card:hover img {
+    transform: scale(1.05);
+}
+
+.book-card img {
+    transition: transform 0.4s ease;
+}
+
+/* TITLE HOVER */
+.book-card h4 {
+    transition: color 0.3s;
+}
+
+.book-card:hover h4 {
+    color: #4b5563;
+}
+
+/* TAG HOVER */
+.tag:hover {
+    background: #d1d5db;
+}
