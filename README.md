@@ -1,6 +1,10 @@
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Tech](https://img.shields.io/badge/stack-Node%20%7C%20Express%20%7C%20Postgres-blue)
 
+## 🌐 Live Demo
+
+🔗 https://readium-5uwq.onrender.com
+
 # 📚 Readium — Your Personal Knowledge Engine
 
 > Built for readers who think, not just consume.
@@ -54,6 +58,12 @@ Track your books, capture insights, and build a system where ideas compound over
 | Frontend | EJS, CSS (custom UI) |
 | APIs     | Google Books API     |
 | Styling  | Custom design system |
+
+---
+## 🚀 Deployment
+
+- Backend hosted on Render  
+- Database powered by Neon (PostgreSQL)  
 
 ---
 
