@@ -441,15 +441,5 @@ router.get('/creator', async (req, res) => {
   res.render('creator');
 })
 
-// temprary checking
-router.get("/test-db", async (req, res) => {
-  try {
-    const result = await db.query("SELECT NOW()");
-    res.send(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.send("DB ERROR");
-  }
-});
 
 module.exports = router;
