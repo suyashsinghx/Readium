@@ -1,13 +1,29 @@
-const { Client } = require("pg");
+//info: This code is for setup and Run DataBase Postgres in local system
 
-const db = new Client({
-  user: "postgres",
-  host: "localhost",
-  database: "readium",
-  password: "YOUR_DB_PASSWORD",
-  port: 5432,
+// const { Client } = require("pg");
+
+// const db = new Client({
+//   user: "postgres",
+//   host: "localhost",
+//   database: "readium",
+//   password: "YOUR_DB_PASSWORD",
+//   port: 5432,
+// });
+
+// db.connect();
+
+// module.exports = db;
+
+//-----------------------------------------------------------
+//Info: this code Below id setup for database online on NEON for make it available for users
+
+const { Pool } = require("pg");
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
-db.connect();
-
-module.exports = db;
+module.exports = pool;
