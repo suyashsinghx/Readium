@@ -1,0 +1,100 @@
+
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/login.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- DECORATIVE BACKGROUND BLOBS -->
+    <div class="login-bg-blob login-bg-blob--topleft" aria-hidden="true"></div>
+    <div class="login-bg-blob login-bg-blob--btmright" aria-hidden="true"></div>
+
+    <!-- MINIMAL NAV (login has no full navbar) -->
+    <!-- <nav class="login-nav">
+        <span class="login-nav-brand">Readium</span>
+    </nav> -->
+
+    <main class="login-main">
+        <div class="login-center">
+
+            <!-- FORM CARD -->
+            <div class="login-card">
+
+                <!-- CARD HEADER -->
+                <div class="login-card-header">
+                    <h1 class="login-card-title">Welcome <a href="/">back</a></h1>
+                    <p class="login-card-sub">Continue your journey.</p>
+                </div>
+
+                <!-- FORM -->
+                <form action="/auth/login" method="POST" class="login-form">
+
+                    <!-- EMAIL -->
+                    <div class="login-field">
+                        <label for="email" class="login-field-label">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="curator@readium.com" required
+                            class="login-field-input" />
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div class="login-field">
+                        <div class="login-field-label-row">
+                            <label for="password" class="login-field-label">Password</label>
+                            <a href="#" class="login-forgot-link">Forgotten Password</a>
+                        </div>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required
+                            class="login-field-input" autocomplete="off" />
+                    </div>
+
+                    <!-- SUBMIT -->
+                    <button type="submit" class="google-btn">
+                        <img src="/images/favicon.ico/favicon.svg" alt="Google" class="google-icon"
+                            style="height: 18px;">
+                        <span>Login</span>
+                    </button>
+                    <!-- GOOGLE LOGIN -->
+                    <div class="login-divider">
+                        <span>or</span>
+                    </div>
+                    
+                    
+                    <a href="/auth/google" class="google-btn">
+                        <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="google-icon" style="height: 18px;">
+                        <span>Continue with Google</span>
+                    </a>
+
+                </form>
+
+                <!-- FOOTER LINK -->
+                <div class="login-card-footer">
+                    <p class="login-card-footer-text">
+                        New to the sanctuary?
+                        <a href="/auth/signup" class="login-signup-link">Create an account</a>
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- QUOTE + DECORATIVE IMAGE ROW -->
+            <div class="login-below-card">
+
+                <!-- DECORATIVE BOOK IMAGE (bottom-left) -->
+                <div class="login-deco-img-wrap">
+                    <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEz-mcT1iC4AR0Ht1bUfjmw_n5SevGrtxIznjcOAgvkFi4puElUV_hGQNlHQYkbhfRKgG61IwXO84IPW7CrUeUkW9rdDPV7QF0KPZjX26Y8g0J5CFwvo3GXH0FtcBRW9Y83lkNFdD1hMcD84AjZTpVlKwZJ-IKWb1RE1QZ9tYVmI3QkOr63QfQd9eVwgyhk2iRZvLIxPrKhT5BcAroQiqUyVct82brl_FvtRL-zwm4BskzhEq83WKFLHDTCGCsamGm_Eb8qk6rrtE"
+                        alt="Books on a linen surface" class="login-deco-img" />
+                </div>
+
+                <!-- MANIFESTO QUOTE BLOCK -->
+                <div class="login-quote-block">
+                    <p class="login-quote-text">
+                        "The digital world is not just a tool, but a landscape for the mind to inhabit with intention."
+                    </p>
+                    <span class="login-quote-source">— THE MANIFESTO</span>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+

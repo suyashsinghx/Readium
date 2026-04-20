@@ -1,0 +1,424 @@
+/* =========================
+   CSS VARIABLES
+========================= */
+:root {
+    --primary: #4e6171;
+    --primary-dim: #425564;
+    --primary-container: #d1e5f8;
+    --on-primary: #f3f8ff;
+    --on-primary-container: #415463;
+    --surface: #f9f9f9;
+    --surface-low: #f2f4f4;
+    --surface-container: #ebeeef;
+    --surface-high: #e4e9ea;
+    --surface-highest: #dde4e5;
+    --surface-white: #ffffff;
+    --tertiary: #54625d;
+    --tertiary-container: #e7f7f0;
+    --on-tertiary-cont: #505f59;
+    --on-tertiary-fixed-var: #5b6964;
+    --on-surface: #2d3435;
+    --on-surface-var: #5a6061;
+    --outline-var: #adb3b4;
+}
+
+/* =========================
+   DECORATIVE BLOBS
+========================= */
+.bg-blob {
+    position: fixed;
+    z-index: -1;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.28;
+    pointer-events: none;
+}
+
+.bg-blob--right {
+    top: 25%;
+    right: -8%;
+    width: 480px;
+    height: 480px;
+    background: var(--primary-container);
+}
+
+.bg-blob--left {
+    bottom: 20%;
+    left: -8%;
+    width: 380px;
+    height: 380px;
+    background: var(--tertiary-container);
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+.signup-main {
+    min-height: calc(100vh - 160px);
+    /* leave room for header + footer */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 48px;
+    /* 80px top clears the fixed header */
+}
+
+.signup-wrapper {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+}
+
+/* =========================
+   PAGE HEADING
+========================= */
+.signup-heading {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.signup-heading-title {
+    font-family: 'Newsreader', serif;
+    font-size: 52px;
+    font-weight: 500;
+    font-style: normal;
+    letter-spacing: -0.5px;
+    line-height: 1.05;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.signup-heading-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--on-surface-var);
+    max-width: 340px;
+    margin: 0 auto;
+}
+
+/* =========================
+   FORM CARD
+========================= */
+.signup-card {
+    background: var(--surface-white);
+    border-radius: 8px;
+    padding: 40px 40px 32px;
+    box-shadow: 0 12px 32px rgba(45, 52, 53, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 24px;
+}
+
+/* =========================
+   FORM
+========================= */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+/* FIELD GROUP */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--on-surface-var);
+}
+
+.field-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 16px;
+    background: var(--surface-highest);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--on-surface);
+    outline: none;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.field-input::placeholder {
+    color: var(--outline-var);
+}
+
+.field-input:focus {
+    background: var(--primary-container);
+    box-shadow: none;
+}
+
+/* TERMS ROW */
+.form-terms {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+.terms-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.terms-checkbox {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    border: none;
+    background: var(--surface-highest);
+    accent-color: var(--primary);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.terms-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--on-surface-var);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.terms-link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: text-decoration 0.15s ease;
+}
+
+.terms-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* SUBMIT BUTTON */
+.signup-btn {
+    width: 100%;
+    padding: 15px 24px;
+    background: linear-gradient(145deg, #4e6171 0%, #425564 100%);
+    color: var(--on-primary);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    margin-top: 4px;
+}
+
+.signup-btn:hover {
+    opacity: 0.92;
+}
+
+.signup-btn:active {
+    transform: scale(0.985);
+}
+
+/* =========================
+   LOGIN LINK ROW
+========================= */
+.signup-login-row {
+    border-top: 1px solid var(--surface-container);
+    padding-top: 20px;
+    text-align: center;
+}
+
+.signup-login-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--on-surface-var);
+    margin: 0;
+}
+
+.signup-login-link {
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    margin-left: 4px;
+    transition: text-decoration 0.15s ease;
+}
+
+.signup-login-link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* =========================
+   MANIFESTO QUOTE BLOCK
+========================= */
+.signup-quote-block {
+    border-left: 4px solid var(--tertiary);
+    background: var(--tertiary-container);
+    border-radius: 0 4px 4px 0;
+    padding: 22px 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* margin-top: 8px; */
+}
+
+.signup-quote-text {
+    font-family: 'Newsreader', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--on-tertiary-cont);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.signup-quote-source {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--on-tertiary-fixed-var);
+}
+
+.login-below-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    opacity: 0.88;
+}
+
+.login-below-card {
+    flex-direction:row;
+}
+
+/* .signup-divider{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.google-btn span{
+    margin-left: 12px;
+} */
+/* GOOGLE BUTTON */
+.google-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--on-surface-var);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #fff;
+    color: #374151;
+    /* font-size: 14px; */
+    text-decoration: none;
+    transition: all 0.25s ease;
+    margin-top: 0px;
+}
+
+.google-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.google-icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* DIVIDER */
+.login-divider,
+.signup-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    /* margin: 18px 0; */
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.login-divider::before,
+.login-divider::after,
+.signup-divider::before,
+.signup-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.login-divider span,
+.signup-divider span {
+    margin: 0 10px;
+}
+
+
+/* DECORATIVE BOOK IMAGE */
+.login-deco-img-wrap {
+    flex-shrink: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--surface-container);
+    filter: grayscale(100%);
+    opacity: 0.75;
+}
+
+.login-deco-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.login-deco-img-wrap {
+    width: 80px;
+    height: 80px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 480px) {
+    .signup-card {
+        padding: 28px 24px 24px;
+    }
+
+    .signup-heading-title {
+        font-size: 40px;
+    }
+
+    .bg-blob {
+        display: none;
+    }
+}

@@ -1,0 +1,190 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/userAcc.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ===== MAIN ===== -->
+    <main class="settings-main">
+
+        <!-- PAGE HEADER -->
+        <header class="settings-page-header">
+            <h1 class="settings-page-title">The Private Library</h1>
+            <p class="settings-page-sub">Refine your digital existence. A sanctuary for your personal identity.</p>
+        </header>
+
+        <div class="settings-sections">
+
+            <!-- ===== SECTION 1: PROFILE & IDENTITY ===== -->
+            <section class="settings-section">
+
+                <!-- AVATAR -->
+                <div class="settings-avatar-wrap">
+                    <form action="/accounts/avatar" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="avatar" id="avatarInput" hidden onchange="this.form.submit()">
+                    
+                        <div class="settings-avatar-outer avatar-edit" onclick="document.getElementById('avatarInput').click()">
+                            <img src="<%= user?.avatar || '/images/favicon.ico/favicon.svg' %>" class="settings-avatar-img">
+                            <span class="edit-icon material-symbols-outlined">edit</span>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- FORM FIELDS -->
+                <form action="/accounts/profile" method="POST" class="settings-profile-form">
+
+                    <!-- DISPLAY NAME -->
+                    <div class="settings-field">
+                        <label class="settings-field-label">Display Name</label>
+                    
+                        <div class="editable-field" onclick="enableEdit(this)">
+                    
+                            <input type="text" name="name" value="<%= user?.name || '' %>"
+                                class="settings-field-input settings-field-input--lg" readonly />
+                    
+                            <button type="submit" class="save-btn" onclick="event.stopPropagation()">
+                                <span class="material-symbols-outlined">check</span>
+                            </button>
+                    
+                        </div>
+                    </div>
+
+                    <!-- SHORT BIO -->
+                    <div class="settings-field">
+                        <label class="settings-field-label">Short Bio</label>
+                    
+                        <div class="editable-field" onclick="enableEdit(this)">
+                    
+                            <textarea name="bio" rows="2" class="settings-field-input settings-field-textarea"
+                                readonly><%= user?.bio || 'To life, love and everything magical!' %></textarea>
+                    
+                            <button type="submit" class="save-btn" onclick="event.stopPropagation()">
+                                <span class="material-symbols-outlined">check</span>
+                            </button>
+                    
+                        </div>
+                    </div>
+
+                    <!-- PRIMARY EMAIL -->
+                    <div class="settings-field">
+                        <label class="settings-field-label">Primary Email</label>
+                        <div class="settings-field-underline settings-field-underline--row">
+                            <span class="settings-email-value">
+                                <%= user ? user.email : 'elena.thorne@atelier.digital' %>
+                            </span>
+                            <span class="settings-email-note">CONTACT CURATOR TO CHANGE</span>
+                        </div>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- ===== SECTION 2: SECURITY ===== -->
+            <section class="settings-section settings-section--security">
+
+                <div class="settings-section-header">
+                    <h2 class="settings-section-title">Security &amp; Access</h2>
+                </div>
+
+                <% if (user && user.password) { %>
+                 
+                <form action="/auth/accounts/password" method="POST" class="settings-security-form">
+
+                    <div class="settings-password-grid">
+
+                        <div class="settings-field">
+                            <label class="settings-field-label">Current Password</label>
+                            <div class="settings-field-underline">
+                                <input type="password" name="current_password" placeholder="••••••••"
+                                    class="settings-field-input" />
+                            </div>
+                        </div>
+
+                        <div class="settings-field">
+                            <label class="settings-field-label">New Password</label>
+                            <div class="settings-field-underline">
+                                <input type="password" name="new_password" placeholder="Enter new password"
+                                    class="settings-field-input" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="settings-security-actions">
+                        <button type="submit" class="settings-update-btn">UPDATE SECURITY</button>
+                    </div>
+
+                </form>
+
+                <% } else { %>
+                
+                    <!-- GOOGLE USER -->
+                    <div class="settings-security-disabled">
+                        <p>This account is secured via Google.</p>
+                        <span>Password changes are managed through your Google account.</span>
+                
+                    </div>
+                    <a href="https://myaccount.google.com/security" target="_blank" class="settings-update-btn">
+                        Manage Google Security →
+                    </a>
+                
+                    <% } %>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <%- include("partials/footer") %>
+
+    <script>
+        // Dropdown toggle
+        const toggle = document.getElementById('userDropdownToggle');
+        const dropdown = document.getElementById('userDropdown');
+        const wrap = document.getElementById('userDropdownWrap');
+
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = dropdown.classList.toggle('settings-nav-dropdown--open');
+            toggle.setAttribute('aria-expanded', open);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!wrap.contains(e.target)) {
+                dropdown.classList.remove('settings-nav-dropdown--open');
+                toggle.setAttribute('aria-expanded', false);
+            }
+        });
+    </script>
+
+    <script>
+        function enableEdit(container) {
+            const input = container.querySelector("input, textarea");
+
+            container.classList.add("editing");
+            input.removeAttribute("readonly");
+            input.focus();
+
+            // move cursor to end
+            if (input.setSelectionRange) {
+                const len = input.value.length;
+                input.setSelectionRange(len, len);
+            }
+
+            // auto exit when clicked outside
+            document.addEventListener("click", function handler(e) {
+                if (!container.contains(e.target)) {
+                    container.classList.remove("editing");
+                    input.setAttribute("readonly", true);
+                    document.removeEventListener("click", handler);
+                }
+            });
+        }
+    </script>

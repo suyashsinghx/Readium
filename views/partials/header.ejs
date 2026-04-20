@@ -18,50 +18,83 @@
 
 <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
 
-            <!-- LOGO -->
-            <div class="nav-logo">
-                <a href="/" class="logo">
-                
-                    <svg class="logo-svg" viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="0" y="4" width="20" height="3.5" rx="1.75" fill="currentColor" />
-                        <rect x="0" y="11" width="15" height="3.5" rx="1.75" fill="currentColor" />
-                        <rect x="0" y="18" width="10" height="3.5" rx="1.75" fill="currentColor" />
-                
-                        <text x="30" y="22" font-family="Georgia, 'Times New Roman', serif" font-size="20" letter-spacing="-0.3"
-                            fill="currentColor">
-                            Readium
-                        </text>
-                    </svg>
-                
-                </a>
+        <!-- full navbar -->
+        <nav class="navbar">
+            <div class="nav-container">
+        
+                <!-- LOGO -->
+                <div class="nav-logo">
+                    <a href="/" class="logo">
+        
+                        <svg class="logo-svg" viewBox="0 0 180 36" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="4" width="20" height="3.5" rx="1.75" fill="currentColor" />
+                            <rect x="0" y="11" width="15" height="3.5" rx="1.75" fill="currentColor" />
+                            <rect x="0" y="18" width="10" height="3.5" rx="1.75" fill="currentColor" />
+        
+                            <text x="30" y="22" font-family="Georgia, 'Times New Roman', serif" font-size="20"
+                                letter-spacing="-0.3" fill="currentColor">
+                                Readium
+                            </text>
+                        </svg>
+        
+                    </a>
+                </div>
+        
+                <!-- LINKS -->
+                <div class="nav-links" id="navLinks">
+                    <a href="/home" class="nav-link" data-path="/home">Home</a>
+                    <a href="/books" class="nav-link" data-path="/books">My Books</a>
+                    <a href="/dashboard" class="nav-link" data-path="/dashboard">Dashboard</a>
+                    <a href="/creator" class="nav-link" data-path="/creator"> <i class="ri-code-s-slash-fill"></i> Creator </a>
+        
+                    <!-- ANIMATED UNDERLINE INDICATOR -->
+                    <span class="nav-indicator" id="navIndicator"></span>
+                </div>
+        
+                <!-- ACTIONS -->
+        
+                <div class="nav-actions">
+                    <div class="nav-actions">
+                    
+                        <% if (user) { %>
+                    
+                            <!-- LOGGED IN -->
+                            <a href="/add" class="nav-add-btn">Add Book</a>
+                    
+                            <div class="profile-dropdown">
+                                <a href="/accounts" class="nav-profile-btn">
+                                    <% if (user.avatar) { %>
+                                        <img src="<%= user.avatar %>" class="nav-avatar" />
+                                        <% } else { %>
+                                            <span class="material-symbols-outlined">account_circle</span>
+                                            <% } %>
+                                </a>
+                    
+                                <div class="dropdown-menu">
+                                    <a href="/accounts">Account</a>
+                                    <a href="/auth/logout">Logout</a>
+                                </div>
+                            </div>
+                    
+                            <% } else { %>
+                    
+                                <!-- NOT LOGGED IN -->
+                                <a href="/auth/login" class="nav-add-btn">Login</a>
+
+                                <a href="/auth/signup" class="nav-login-btn">Sign Up</a>
+                    
+                                <% } %>
+                    
+                    </div>
+                        
+                </div>
+        
             </div>
+        </nav>
+      
 
-            <!-- LINKS -->
-            <div class="nav-links" id="navLinks">
-                <a href="/" class="nav-link" data-path="/">Home</a>
-                <a href="/books" class="nav-link" data-path="/books">My Books</a>
-                <a href="/dashboard" class="nav-link" data-path="/dashboard">Dashboard</a>
-                <a href="/creator" class="nav-link" data-path="/creator"> <i class="ri-code-s-slash-fill"></i> creator </a>
-
-                <!-- ANIMATED UNDERLINE INDICATOR -->
-                <span class="nav-indicator" id="navIndicator"></span>
-            </div>
-
-            <!-- ACTIONS -->
-             
-            <div class="nav-actions">
-
-                <a href="/add" class="nav-add-btn">Add Book</a>
-                <button class="nav-profile-btn" aria-label="Profile">
-                <span class="material-symbols-outlined">account_circle</span>
-                </button>
-            </div>
-
-        </div>
-    </nav>
+    
 
     <script>
         (function () {
@@ -70,12 +103,22 @@
             const path = window.location.pathname;
 
             // Find the best matching link
+            const validPaths = ["/home", "/books", "/dashboard", "/creator"];
+            const logo = document.querySelector(".logo");
+
             let activeLink = null;
             let bestLen = 0;
 
             links.forEach(link => {
                 const lp = link.getAttribute('data-path');
-                if (path === lp || (lp !== '/' && path.startsWith(lp))) {
+
+                if (path === lp) {
+                    activeLink = link;
+                    bestLen = lp.length;
+                    return;
+                }
+
+                if (lp !== '/' && path.startsWith(lp)) {
                     if (lp.length > bestLen) {
                         bestLen = lp.length;
                         activeLink = link;
@@ -83,8 +126,23 @@
                 }
             });
 
-            // Fallback: home
-            if (!activeLink) activeLink = links[0];
+            //  KEY LOGIC
+            if (!validPaths.includes(path)) {
+                indicator.style.opacity = "0"; // hide underline
+
+                // make logo bold
+                logo.classList.add("logo--active");
+                logo.addEventListener("click", () => {
+                    logo.style.transform = "scale(0.96)";
+
+                    setTimeout(() => {
+                        logo.style.transform = "scale(1.02)";
+                    }, 120);
+                });
+
+            } else {
+                setIndicator(activeLink, false);
+            }
 
             function setIndicator(link, animate) {
                 link.classList.add('nav-link--active');
@@ -119,6 +177,8 @@
             // Hover preview
             links.forEach(link => {
                 link.addEventListener('mouseenter', () => {
+                    if (!validPaths.includes(path)) return;
+
                     links.forEach(l => l.classList.remove('nav-link--active'));
                     setIndicator(link, true);
                 });
@@ -126,10 +186,15 @@
 
             // Reset to active on mouse leave
             document.getElementById('navLinks').addEventListener('mouseleave', () => {
+                if (!validPaths.includes(path)) return;
+
                 links.forEach(l => l.classList.remove('nav-link--active'));
                 setIndicator(activeLink, true);
             });
         })();
+
+        
+
     </script>
 
     

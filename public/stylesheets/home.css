@@ -201,3 +201,43 @@ img {
 .tag:hover {
     background: #d1d5db;
 }
+/* EMPTY LIBRARY STATE */
+.empty-library {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.empty-text h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.empty-text p {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* EXPLORE GRID */
+.explore-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Slightly faded demo cards */
+.explore-card {
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+
+.explore-card:hover {
+    opacity: 1;
+    transform: translateY(-6px);
+}
+
+/* CTA */
+.empty-cta-wrap {
+    margin-top: 35px;
+}

@@ -1,0 +1,593 @@
+/* =========================
+   CSS VARIABLES
+========================= */
+:root {
+    --primary: #4e6171;
+    --primary-dim: #425564;
+    --primary-container: #d1e5f8;
+    --on-primary: #f3f8ff;
+    --surface: #f9f9f9;
+    --surface-low: #f2f4f4;
+    --surface-container: #ebeeef;
+    --surface-high: #e4e9ea;
+    --surface-highest: #dde4e5;
+    --surface-white: #ffffff;
+    --on-surface: #2d3435;
+    --on-surface-var: #5a6061;
+    --outline-var: #adb3b4;
+    --outline: #757c7d;
+    --slate-100: #f1f5f9;
+    --slate-400: #94a3b8;
+    --slate-500: #64748b;
+    --slate-800: #1e293b;
+    --slate-900: #0f172a;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.settings-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--slate-100);
+}
+
+.settings-nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* BRAND */
+.settings-nav-brand {
+    font-family: 'Newsreader', serif;
+    font-size: 22px;
+    font-style: italic;
+    letter-spacing: -0.3px;
+    color: var(--slate-800);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+/* CENTER LINKS */
+.settings-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.settings-nav-link {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--slate-500);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.settings-nav-link:hover {
+    color: var(--slate-900);
+}
+
+/* USER AREA */
+.settings-nav-user {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.settings-nav-avatar-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.settings-nav-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+}
+
+.settings-nav-chevron {
+    font-size: 20px;
+    color: var(--on-surface-var);
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* DROPDOWN */
+.settings-nav-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 12px);
+    right: 0;
+    min-width: 180px;
+    background: var(--surface-white);
+    border-radius: 8px;
+    box-shadow: 0 12px 32px rgba(45, 52, 53, 0.1);
+    overflow: hidden;
+    border: none;
+    ring: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.settings-nav-dropdown--open {
+    display: block;
+}
+
+.settings-nav-dropdown-item {
+    display: block;
+    padding: 12px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--slate-500);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.settings-nav-dropdown-item--active {
+    color: var(--slate-900);
+    font-weight: 500;
+    border-bottom: 1px solid var(--slate-100);
+}
+
+.settings-nav-dropdown-item:hover {
+    color: var(--slate-900);
+}
+
+/* =========================
+   MAIN
+========================= */
+.settings-main {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 80px 48px 100px;
+}
+
+/* =========================
+   PAGE HEADER
+========================= */
+.settings-page-header {
+    text-align: center;
+    margin-bottom: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.settings-page-title {
+    font-family: 'Newsreader', serif;
+    font-size: 38px;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+.settings-page-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    color: var(--on-surface-var);
+    line-height: 1.65;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+/* =========================
+   SECTIONS WRAPPER
+========================= */
+.settings-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+/* BASE SECTION */
+.settings-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+/* =========================
+   AVATAR
+========================= */
+.settings-avatar-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.settings-avatar-outer {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.settings-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(30%);
+    transition: filter 0.4s ease, transform 0.3s ease;
+    outline: 1px solid rgba(173, 179, 180, 0.2);
+    outline-offset: 4px;
+}
+
+.settings-avatar-outer:hover .settings-avatar-img {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+}
+
+.avatar-edit {
+    position: relative;
+    cursor: pointer;
+}
+
+.edit-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.202);
+    color: white;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.avatar-edit:hover .edit-icon {
+    opacity: 1;
+}
+
+/* CAMERA BUTTON */
+.settings-avatar-camera {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 30px;
+    height: 30px;
+    background: var(--surface-white);
+    border: 1px solid var(--slate-100);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(45, 52, 53, 0.1);
+    transition: box-shadow 0.2s ease;
+}
+
+.settings-avatar-camera:hover {
+    box-shadow: 0 4px 12px rgba(45, 52, 53, 0.15);
+}
+
+.settings-avatar-camera-icon {
+    font-size: 14px;
+    color: var(--on-surface-var);
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* =========================
+   PROFILE FORM
+========================= */
+.settings-profile-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.editable-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.save-btn {
+    position: absolute;
+    right: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+}
+
+/*  only visible when editing */
+.editable-field.editing .save-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.editable-field input[readonly],
+.editable-field textarea[readonly] {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.editable-field.editing input,
+.editable-field.editing textarea {
+    border-bottom: 1px solid #ccc;
+    background: white;
+    cursor: text;
+}
+
+/* =========================
+   SHARED FIELD STYLES
+========================= */
+.settings-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+}
+
+.settings-field-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--on-surface-var);
+}
+
+/* UNDERLINE WRAPPER */
+.settings-field-underline {
+    border-bottom: 1px solid rgba(173, 179, 180, 0.35);
+    padding-bottom: 8px;
+}
+
+/* INPUT (transparent, underline-only style) */
+.settings-field-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 15px;
+    color: var(--on-surface);
+    padding: 4px 0;
+    transition: border-color 0.2s ease;
+}
+
+.settings-field-input--lg {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.settings-field-textarea {
+    resize: none;
+    font-size: 14px;
+    line-height: 1.65;
+    padding: 4px 0;
+
+}
+
+/* ROW (email: value + note side by side) */
+.settings-field-underline--row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.settings-email-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--on-surface);
+}
+
+.settings-email-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    font-style: italic;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--on-surface-var);
+    white-space: nowrap;
+}
+
+/* =========================
+   SECURITY SECTION
+========================= */
+.settings-section--security {
+    align-items: stretch;
+    border-top: 1px solid rgba(173, 179, 180, 0.12);
+    padding-top: 48px;
+    gap: 32px;
+}
+
+.settings-section-header {
+    margin-bottom: 8px;
+}
+
+.settings-section-title {
+    font-family: 'Newsreader', serif;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--on-surface);
+    margin: 0;
+}
+
+/* PASSWORD GRID */
+.settings-security-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.settings-password-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+}
+
+/* ACTIONS (right-aligned) */
+.settings-security-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* UPDATE BUTTON */
+.settings-update-btn {
+    padding: 13px 36px;
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    width: fit-content;
+}
+
+.settings-update-btn:hover {
+    background: var(--primary-dim);
+}
+
+
+/* =========================
+   FIX APPEARANCE THINGS
+========================= */
+/* ===== EDITABLE FIELD CONTAINER ===== */
+.editable-field {
+    position: relative;
+    cursor: text;
+    padding-right: 40px;
+}
+
+/* ===== NAME ===== */
+.settings-field-input--lg {
+    font-size: 28px;
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    color: #1e293b;
+    border: none;
+    background: transparent;
+}
+
+/* ===== BIO ===== */
+.settings-field-textarea {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #64748b;
+    border: none;
+    background: transparent;
+    resize: none;
+}
+
+/* ===== LABEL ===== */
+.settings-field-label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+/* ===== EDIT HOVER EFFECT ===== */
+.editable-field:hover {
+    background: #f8fafc;
+    border-radius: 6px;
+}
+
+/* ===== SAVE BUTTON (HIDDEN BY DEFAULT) ===== */
+.save-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+
+    opacity: 0;
+    pointer-events: none;
+
+    background: #4f6272;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+/* ===== SHOW BUTTON ONLY WHEN EDITING ===== */
+.editable-field.editing .save-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ===== INPUT FOCUS ===== */
+.editable-field.editing input,
+.editable-field.editing textarea {
+    outline: none;
+    border-bottom: 1px solid #4f6272;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+    .settings-nav-links {
+        display: none;
+    }
+
+    .settings-main {
+        padding: 60px 24px 80px;
+    }
+
+    .settings-password-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .settings-nav-inner {
+        padding: 16px 24px;
+    }
+
+    .settings-footer-inner {
+        padding: 0 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .settings-field-underline--row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}

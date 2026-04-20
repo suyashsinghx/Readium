@@ -67,33 +67,82 @@
 
         <!-- RECENT BOOKS -->
         <section class="recent">
-            <div class="recent-header">
-                <div>
-                    <h2>Recently Added</h2>
-                    <p>The latest additions to your intellectual shelf.</p>
-                </div>
-                <a href="/books">View All Library</a>
-            </div>
+
+            <% if (books.length === 0) { %>
+                <div></div>
+                <% } else { %>
+                    <div class="recent-header">
+                        <div>
+                            <h2>Recently Added</h2>
+                            <p>The latest additions to your intellectual shelf.</p>
+                        </div>
+                        <a href="/books">View All Library</a>
+                    </div>
+                    <% } %>
+             
+             
+            
 
             <div class="books-grid">
+            
                 <% if (books.length===0) { %>
-                    <p>No books added yet</p>
-                    <% } %>
+            
+                    <!-- EMPTY STATE WITH DISCOVERY -->
+                    <div class="empty-library">
+            
+                        <div class="empty-text">
+                            <h3>Your library is empty</h3>
+                            <p>Start building your knowledge system. Here are some ideas to begin with:</p>
+                        </div>
+            
+                        <div class="explore-grid">
+                            <% exploreBooks.forEach(book=> { %>
+                                <div class="book-card explore-card">
+            
+                                    <img src="<%= book.cover_url %>" />
+            
+                                    <div class="book-info">
+                                        <h4>
+                                            <%= book.title %>
+                                        </h4>
+                                        <p class="author">
+                                            <%= book.author %>
+                                        </p>
+            
+                                        <div class="rating">
+                                            <i class="ri-star-s-fill"></i>
+                                            <span>
+                                                <%= book.rating %>
+                                            </span>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                                <% }) %>
+                        </div>
+            
+                        <div class="empty-cta-wrap">
+                            <a href="/add" class="btn-primary">Start Adding Books →</a>
+                        </div>
+            
+                    </div>
+            
+                    <% } else { %>
 
+            
                         <% books.forEach(book=> { %>
                             <div class="book-card" onclick="window.location='/books/<%= book.id %>'">
-
+            
                                 <img src="<%= book.cover_url || '/images/default.png' %>" />
-
+            
                                 <div class="book-info">
                                     <h4>
                                         <%= book.title %>
                                     </h4>
-
                                     <p class="author">
                                         <%= book.author %>
                                     </p>
-
+            
                                     <div class="rating">
                                         <i class="ri-star-s-fill"></i>
                                         <span>
@@ -101,9 +150,12 @@
                                         </span>
                                     </div>
                                 </div>
-
+            
                             </div>
                             <% }) %>
+            
+                                <% } %>
+            
             </div>
         </section>
 

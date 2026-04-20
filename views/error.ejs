@@ -1,0 +1,83 @@
+<%- include("partials/header") %>
+
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/error.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Inter:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <main class="notfound-main">
+        <div class="notfound-grid">
+
+            <!-- ===== LEFT: TEXT CONTENT ===== -->
+            <div class="notfound-left">
+
+                <!-- EYEBROW -->
+                <p class="notfound-eyebrow">ERROR SEQUENCE 404</p>
+
+                <!-- GIANT 404 -->
+                <h1 class="notfound-number">404</h1>
+
+                <!-- TITLE -->
+                <h2 class="notfound-title">The Lost Chapter</h2>
+
+                <!-- BODY -->
+                <p class="notfound-body">
+                    This page seems to have been misplaced in the archives. Like a forgotten footnote in a grand
+                    manuscript, it remains elusive.
+                </p>
+
+                <!-- ACTIONS -->
+                <div class="notfound-actions">
+                    <a href="/" class="notfound-btn-primary">
+                        Return to Library
+                        <span class="material-symbols-outlined notfound-btn-icon">arrow_right_alt</span>
+                    </a>
+                    <button class="notfound-btn-ghost">
+                        Consult Archivist
+                    </button>
+                </div>
+
+                <!-- QUOTE BLOCK -->
+                <div class="notfound-quote">
+                    <p class="notfound-quote-text">
+                        "True silence is the rest of the mind, and is to the spirit what sleep is to the body,
+                        nourishment and refreshment."
+                    </p>
+                    <span class="notfound-quote-attr">— WILLIAM PENN, FOUND IN THE VOID</span>
+                </div>
+
+            </div>
+
+            <!-- ===== RIGHT: ABSTRACT VISUAL ===== -->
+            <div class="notfound-right">
+                <div class="notfound-visual-wrap">
+
+                    <!-- LAYERED PAPER SHEETS (behind) -->
+                    <div class="notfound-paper notfound-paper--back" aria-hidden="true"></div>
+                    <div class="notfound-paper notfound-paper--mid" aria-hidden="true"></div>
+
+                    <!-- MAIN CARD -->
+                    <div class="notfound-visual-card">
+                        <!-- BG IMAGE (faint) -->
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH27YYZW_3FdotqFG4gMY6V2G3YnwGLjRs-NxJrcf9jTHoI4h2gleN29F1OutSsPy_wMNzX69O5pY4lbvwFrdZ0AzH3a2DXdOAlOS5swFyzQ1phOswr9a9ShOKmaX3KzvgYozPm2dINJ8WdrkC0qzfh9RkAn0i3zvDS-NKadahq8ccUKDLhFaSDe-hxQOn2qd1Kcbz89T1E1zBxXjC825JRLFjEgfMvY93qavAVwL1XK_rY-bsx3gAU2Qa3btorpVt7I-iGcuX9Nc"
+                            alt="Empty library corridor" class="notfound-visual-bg">
+                        <!-- ICON + LABEL -->
+                        <div class="notfound-visual-inner">
+                            <span class="material-symbols-outlined notfound-visual-icon">auto_stories</span>
+                            <p class="notfound-visual-label">Folio Missing</p>
+                        </div>
+                    </div>
+
+                    <!-- DECORATIVE GLOW -->
+                    <div class="notfound-glow" aria-hidden="true"></div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <%- include("partials/footer") %>

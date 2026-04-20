@@ -77,34 +77,51 @@
 
                 <div class="section-header">
                     <h2 class="section-title">Top Rated Works</h2>
+                    <% if (books.length > 0) { %>
                     <a href="/books" class="view-link">View library</a>
+                    <% } %>
                 </div>
 
                 <div class="books-grid">
-                    <% books.forEach(book=> { %>
-                        <div class="book-card-item">
-                            <a href="/books/<%= book.id %>">
-                            <div class="book-cover-wrap">
-                                <img src="<%= book.cover_url || '/images/default.png' %>" alt="<%= book.title %>"
-                                    class="book-cover-img">
-                            </div>
-                            <div class="book-card-meta">
-                                <h3 class="book-card-title">
-                                    <%= book.title %>
-                                </h3>
-                                <p class="book-card-author">
-                                    <%= book.author %>
-                                </p>
-                                <div class="book-card-stars">
-                                    <% for(let i=1; i <=5; i++) { %>
-                                        <span class="star <%= i <= (book.rating || 5) ? 'star--filled' : '' %>">★</span>
-                                        <% } %>
-                                </div>
-                            </div>
-                            </a>
+                
+                    <% if (books.length===0) { %>
+                
+                        <div class="empty-card">
+                            <h3>No books yet</h3>
+                            <p>Your library is empty. Start by adding a book you’re currently reading.</p>
+                            <a href="/add" class="empty-cta">Add your first book →</a>
                         </div>
-                        <% }) %>
+                
+                        <% } else { %>
+                
+                            <% books.forEach(book=> { %>
+                                <div class="book-card-item">
+                                    <a href="/books/<%= book.id %>">
+                                        <div class="book-cover-wrap">
+                                            <img src="<%= book.cover_url || '/images/default.png' %>" class="book-cover-img">
+                                        </div>
+                                        <div class="book-card-meta">
+                                            <h3 class="book-card-title">
+                                                <%= book.title %>
+                                            </h3>
+                                            <p class="book-card-author">
+                                                <%= book.author %>
+                                            </p>
+                                            <div class="book-card-stars">
+                                                <% for(let i=1; i <=5; i++) { %>
+                                                    <span class="star <%= i <= (book.rating || 5) ? 'star--filled' : '' %>">★</span>
+                                                    <% } %>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <% }) %>
+                
+                                    <% } %>
+                
                 </div>
+
+                
 
             </div>
 
@@ -114,24 +131,35 @@
                 <h2 class="section-title">Recent Musings</h2>
 
                 <div class="musings-list">
+                
                     <% if (notes.length===0) { %>
-                        <p class="empty-state">No notes yet.</p>
-                        <% } %>
-
+                
+                        <div class="empty-card">
+                            <h3>No thoughts captured yet</h3>
+                            <p>Reading without writing leads to forgetting. Start capturing your ideas.</p>
+                            <a href="/books" class="empty-cta">Write your first note →</a>
+                        </div>
+                
+                        <% } else { %>
+                
                             <% notes.forEach(note=> { %>
                                 <div class="musing-card">
                                     <p class="musing-meta">
-                                        <%= new Date(note.date).toLocaleDateString('en-US', { month: 'short' ,
-                                            day: '2-digit' }).toUpperCase() %>
-                                            <% if (note.book_title) { %> <span class="musing-meta-sep">•</span> FROM "
-                                                <%= note.book_title.toUpperCase() %>"<% } %>
+                                        <%= new Date(note.date).toLocaleDateString('en-US', { month: 'short' , day: '2-digit'
+                                            }).toUpperCase() %>
+                                            <% if (note.book_title) { %>
+                                                <span class="musing-meta-sep">•</span> FROM "<%= note.book_title.toUpperCase() %>"
+                                                    <% } %>
                                     </p>
                                     <p class="musing-text">"<%= note.content.slice(0, 130) %>..."</p>
                                 </div>
                                 <% }) %>
+                
+                                    <% } %>
+                
                 </div>
 
-                <a href="/notes" class="open-vault-link">Open Knowledge Vault</a>
+                <!-- <a href="/notes" class="open-vault-link">Open Knowledge Vault</a> -->
 
             </div>
 
@@ -157,17 +185,24 @@
         
             <div class="thematic-right">
                 <div class="theme-grid">
-        
+                
                     <% if (graphBooks.length===0) { %>
-                        <p>No books yet</p>
-                        <% } %>
-        
+                
+                        <div class="empty-card">
+                            <h3>No connections yet</h3>
+                            <p>Your ideas will start connecting as you read and write more.</p>
+                        </div>
+                
+                        <% } else { %>
+                
                             <% graphBooks.forEach(book=> { %>
                                 <a href="/books/<%= book.id %>" class="theme-tile">
                                     <%= book.title %>
                                 </a>
                                 <% }) %>
-        
+                
+                                    <% } %>
+                
                 </div>
             </div>
         

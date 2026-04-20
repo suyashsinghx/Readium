@@ -89,7 +89,7 @@ Readium/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/yourusername/readium.git
+git clone https://github.com/suyashsinghx/Readium
 cd readium
 ```
 
@@ -114,6 +114,16 @@ API_KEY=your_google_books_api_key
 Create tables:
 
 ```sql
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  name TEXT,
+  email TEXT UNIQUE,
+  password TEXT,
+  google_id TEXT,
+  avatar TEXT,
+  bio TEXT
+);
+
 CREATE TABLE books (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
@@ -125,7 +135,8 @@ CREATE TABLE books (
   notes TEXT,
   ai_summary TEXT,
   ai_insight TEXT,
-  date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  user_id INT REFERENCES users(id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE notes (
@@ -134,6 +145,7 @@ CREATE TABLE notes (
   title TEXT,
   content TEXT,
   page INT,
+  user_id INT REFERENCES users(id),
   date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
@@ -179,6 +191,9 @@ http://localhost:3000
 
 ### About Creator
 ![Creator](public/images/AboutCreator1.png)
+
+### DEMO
+![Readium Demo](public/videos/ReadiumDemoFull.mov)
 ---
 
 ## 🧠 Future Improvements
@@ -188,6 +203,42 @@ http://localhost:3000
 * Tag-based filtering system
 * User authentication
 * Dark mode support
+
+---
+
+## 🔐 Authentication & User System
+
+- Secure authentication using Passport.js
+- Local strategy (email + password login)
+- Google OAuth 2.0 login integration
+- Session-based authentication with Express Session
+- User-specific data isolation (each user sees only their books & notes)
+
+---
+
+## 👤 User Profile Features
+
+- Editable display name and bio
+- Profile avatar upload (compressed using Sharp)
+- Inline editing UX (click-to-edit fields)
+- Secure password update system (for local users)
+- Google users handled separately (no password conflicts)
+
+---
+
+## 🧩 System Enhancements in This Version
+
+- Added full authentication system (local + Google)
+- Protected routes using `ensureAuth` middleware
+- Linked books and notes to users using `user_id`
+- Implemented dynamic navbar based on auth state
+- Improved dashboard with real user-based data
+- Added fallback UI for new users (empty state handling)
+- Integrated Google Books API for dynamic suggestions
+- Added profile management system (avatar, bio, name)
+- Optimized image uploads using Sharp compression
+- Refactored database queries to be user-specific
+- Improved UX with conditional rendering (logged in vs guest)
 
 ---
 

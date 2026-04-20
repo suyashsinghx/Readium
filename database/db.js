@@ -6,7 +6,7 @@
 //   user: "postgres",
 //   host: "localhost",
 //   database: "readium",
-//   password: "YOUR_DB_PASSWORD",
+//   password: process.env.PG_PASSWORD,
 //   port: 5432,
 // });
 

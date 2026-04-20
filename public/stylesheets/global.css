@@ -208,6 +208,67 @@ a {
   font-size: 26px;
 }
 
+/* LOGIN BUTTON */
+.nav-login-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #4b5563;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.nav-login-btn:hover {
+  background: #374151;
+}
+
+
+
+/* DROPDOWN */
+.profile-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  width: 160px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+/* SHOW ON HOVER */
+.profile-dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* LINKS */
+.dropdown-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: #374151;
+  font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+  background: #f3f4f6;
+}
+
+/* SEPARATOR */
+.dropdown-menu a:last-child {
+  border-top: 1px solid #eee;
+}
+
 /* =========================
    FOOTER
 ========================= */
@@ -254,4 +315,31 @@ a {
 .footer-copy {
   font-size: 13px;
   color: #9ca3af;
+}
+
+/* Nav User Avatar */
+.nav-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+/* nav - logo modify */
+
+.logo--active {
+  font-weight: 700;
+  color: #1e293b;
+
+  /* subtle glow */
+  /* text-shadow: 0 0 6px rgba(79, 98, 114, 0.35),
+    0 0 12px rgba(79, 98, 114, 0.15); */
+
+  transform: scale(1.02);
+}
+
+/* smooth transition */
+.logo {
+  transition: all 0.25s ease;
 }
