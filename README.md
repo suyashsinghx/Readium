@@ -83,7 +83,7 @@ It helps you capture insights, connect ideas, and turn reading into a system for
 
 ## 🗂️ Project Structure
 
-```
+```bash
 Readium/
 │
 ├── routes/          # Express routes
