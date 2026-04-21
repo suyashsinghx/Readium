@@ -4,6 +4,7 @@ const axios = require("axios");
 const multer = require("multer");
 const sharp = require("sharp");
 const path = require("path");
+const fs = require("fs");
 
 const db = require("../database/db");
 
@@ -126,29 +127,46 @@ router.get("/home", ensureAuth, async (req, res) => {
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-router.post("/accounts/avatar", upload.single("avatar"), async (req, res) => {
-  try {
-    // UNIQUE NAME (short + meaningful)
-    const fileName = `${req.user.id}_${Date.now()}.jpg`;
-    const filePath = path.join(__dirname, "../public/uploads/", fileName);
+const uploadDir = path.join(__dirname, "../public/uploads");
 
-    await sharp(req.file.buffer)
-      .resize(200, 200)
-      .jpeg({ quality: 60 })
-      .toFile(filePath);
+// ensure folder exists
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
-    // SAVE ONLY PATH (SMALL STRING)
-    await db.query("UPDATE users SET avatar=$1 WHERE id=$2", [
-      `/uploads/${fileName}`,
-      req.user.id,
-    ]);
+router.post(
+  "/accounts/avatar",
+  ensureAuth,
+  upload.single("avatar"),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.send("No file uploaded");
+      }
 
-    res.redirect("/accounts");
-  } catch (err) {
-    console.error(err);
-    res.send("Upload error");
-  }
-});
+      const fileName = `user_${req.user.id}_${Date.now()}.jpg`;
+      const filePath = path.join(uploadDir, fileName);
+
+      await sharp(req.file.buffer)
+        .resize(200, 200)
+        .jpeg({ quality: 60 })
+        .toFile(filePath);
+
+      // store path in DB
+      const dbPath = `/uploads/${fileName}`;
+
+      await db.query("UPDATE users SET avatar=$1 WHERE id=$2", [
+        dbPath,
+        req.user.id,
+      ]);
+
+      res.redirect("/accounts");
+    } catch (err) {
+      console.error("UPLOAD ERROR:", err);
+      res.send("Upload failed");
+    }
+  },
+);
 // edit bio and name in user accounts page
 router.post("/accounts/profile", async (req, res) => {
   const { name, bio } = req.body;

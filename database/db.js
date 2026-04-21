@@ -1,4 +1,4 @@
-//info: This code is for setup and Run DataBase Postgres in local system
+//info: This code is for setup and Run DataBase Postgres in local machine
 
 // const { Client } = require("pg");
 
@@ -15,7 +15,7 @@
 // module.exports = db;
 
 //-----------------------------------------------------------
-//Info: this code Below id setup for database online on NEON for make it available for users
+//Info: code Below id setup for database online on NEON for make it available for users
 
 const { Pool } = require("pg");
 

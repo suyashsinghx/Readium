@@ -558,6 +558,18 @@
     border-bottom: 1px solid #4f6272;
 }
 
+.settings-security-disabled{
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #2d3435;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.settings-security-disabled p{
+    margin-bottom: 8px;
+}
+
 /* =========================
    RESPONSIVE
 ========================= */

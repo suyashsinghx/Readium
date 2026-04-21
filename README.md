@@ -7,10 +7,24 @@
 
 # 📚 Readium — Your Personal Knowledge Engine
 
-> Built for readers who think, not just consume.
+> A system for readers who want to retain, connect, and apply what they learn.
 
 Readium transforms passive reading into active thinking.
 Track your books, capture insights, and build a system where ideas compound over time.
+
+---
+
+```md
+---
+
+## 💡 Why Readium?
+
+Most reading apps focus on tracking books — not understanding them.
+
+Readium was built to solve a deeper problem:
+> reading without retention.
+
+It helps you capture insights, connect ideas, and turn reading into a system for thinking.
 
 ---
 
@@ -99,13 +113,17 @@ cd readium
 npm install
 ```
 
-### 3. Setup `.env`
+## 3. Environment Variables
 
-Create a `.env` file:
+Create a `.env` file with:
 
 ```env
+DATABASE_URL=your_postgres_connection
+SESSION_SECRET=your_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+GOOGLE_CALLBACK_URL=your_callback_url
 API_KEY=your_google_books_api_key
-```
 
 ---
 
@@ -177,9 +195,6 @@ http://localhost:3000
 
 ## 📸 Screenshots
 
-### Home
-![Home](public/images/ReadiumHome1.png)
-
 ### Dashboard
 ![Dashboard](public/images/ReadiumDashboard1.png)
 
@@ -192,8 +207,53 @@ http://localhost:3000
 ### About Creator
 ![Creator](public/images/AboutCreator1.png)
 
-### DEMO
-![Readium Demo](public/videos/ReadiumDemoFull.mov)
+### Features Updated
+<table>
+  <tr>
+    <td align="center">
+      <img src="public/images/updatePublicPage.png" ><br>
+      <b>Public Page Readium</b>
+    </td>
+    <td align="center">
+      <img src="public/images/updateUserAccountSec.png" ><br>
+      <b>User Account Sec. Readium</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="public/images/updateLoginPagewithOAuth.png" ><br>
+      <b>Login Page Readium</b>
+    </td>
+    <td align="center">
+      <img src="public/images/updateSignUpPagewithOAuth.png" ><br>
+      <b>Signup Page Readium</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="public/images/updateSecurityUserGoogleOAuth.png" width="300"><br>
+      <b>Google OAuth User Security Access</b>
+    </td>
+    <td align="center">
+      <img src="public/images/updateSecurityUserLocal.png" width="300"><br>
+      <b>Local Method Security Access</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="center">
+      <img src="public/images/updateLoginMethods.png" width="300"><br>
+      <b>Login|Signup Methods</b>
+    </td>
+    <td align="center">
+      <img src="public/images/updateDropdownLogout.png" width="300"><br>
+      <b>Drop Down Logout</b>
+    </td>
+  </tr>
+</table>
+
 ---
 
 ## 🧠 Future Improvements
